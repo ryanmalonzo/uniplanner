@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <link
       rel="stylesheet"
@@ -13,16 +13,16 @@
       crossorigin=""
     ></script>
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./css/style.css" />
 
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interactive Map</title>
+    <title>Carte interactive</title>
   </head>
   <body>
     <div id="map"></div>
 
-    <script src="main.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
