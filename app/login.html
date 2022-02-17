@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/f0cb48158b.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Leamap</title>
+  </head>
+  <body>
+    <nav
+      class="navbar is-fixed-top is-dark is-spaced"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div class="navbar-brand">
+        <p class="navbar-item"><a href="/">Leamap</a></p>
+        <!-- <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbar"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a> -->
+      </div>
+
+      <div id="navbar" class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <button class="button is-primary" id="navInscription">
+                <strong>Inscription</strong>
+              </button>
+              <button class="button is-light" id="navConnexion">
+                Connexion
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center center"
+      id="wrapper"
+    >
+      <div id="login">
+        <h1 class="title">Connexion</h1>
+
+        <!--Mail-->
+        <div class="field">
+          <label class="label">Adresse mail</label>
+          <div class="control has-icons-left">
+            <input class="input" type="email" placeholder="Adresse mail" />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+        <!--Mot de passe-->
+        <div class="field">
+          <label class="label">Mot de passe</label>
+          <div class="control has-icons-left">
+            <input class="input" type="password" placeholder="Mot de passe" />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+          </div>
+        </div>
+
+        <!--Se connecter-->
+        <div class="field">
+          <div class="control">
+            <button class="button is-white is-fullwidth">Se connecter</button>
+          </div>
+        </div>
+
+        <!--Inscription-->
+        <p>
+          <a class="has-text-white is-underlined" href="./register.html"
+            >Pas encore de compte ?</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <script src="../js/global.js"></script>
+    <script src="./js/login.js"></script>
+  </body>
+</html>

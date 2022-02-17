@@ -1,14 +1,5 @@
-html {
-  overflow: hidden;
-}
-
 body {
-  background-color: rgb(60, 132, 141);
-}
-
-.center {
-  height: 100vh;
-  width: 100vw;
+  background-color: var(--green);
 }
 
 #logo-outer {
