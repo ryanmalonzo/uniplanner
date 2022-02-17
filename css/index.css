@@ -16,6 +16,10 @@ body {
   color: white;
 }
 
+.is-1 {
+  font-family: "Overpass", sans-serif;
+}
+
 button {
   width: 300px;
 }
