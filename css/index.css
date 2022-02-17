@@ -1,0 +1,30 @@
+html {
+  overflow: hidden;
+}
+
+body {
+  background-color: rgb(60, 132, 141);
+}
+
+.center {
+  height: 100vh;
+  width: 100vw;
+}
+
+#logo-outer {
+  padding: 0 150px;
+}
+
+#logo-letter {
+  font-family: "Oleo Script", cursive;
+  font-size: 200px;
+}
+
+#logo-letter,
+#content > .title {
+  color: white;
+}
+
+button {
+  width: 300px;
+}
