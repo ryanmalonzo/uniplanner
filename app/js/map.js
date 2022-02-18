@@ -1,22 +1,10 @@
 // Functions
 
 function hasGeoPermission() {
-  navigator.geolocation.getCurrentPosition(
-    () => {},
-    (error) => {
-      return false;
-    }
-  );
-  return true;
-}
-
-function setCurrentPos() {
-  navigator.geolocation.getCurrentPosition((position, error) => {
-    const pos = {
-      lat: position.coords.latitude,
-      long: position.coords.longitude,
-    };
-    localStorage.setItem("pos", JSON.stringify(pos));
+  return new Promise((resolve) => {
+    navigator.permissions.query({ name: "geolocation" }).then((result) => {
+      resolve(result.state === "granted");
+    });
   });
 }
 
@@ -24,25 +12,38 @@ function getCurrentPos() {
   return JSON.parse(localStorage.getItem("pos"));
 }
 
+function setCurrentPos() {
+  navigator.geolocation.getCurrentPosition((position) => {
+    const pos = {
+      lat: position.coords.latitude,
+      long: position.coords.longitude,
+    };
+    localStorage.setItem("pos", JSON.stringify(pos));
+    return getCurrentPos();
+  });
+}
+
 function hasCurrentPos() {
-  return getCurrentPos() !== undefined;
+  return getCurrentPos() !== undefined || getCurrentPos() !== null;
 }
 
 // Modal
 
-if (!hasGeoPermission()) {
-  const modal = document.querySelector("#modal");
-  modal.classList.add("is-active");
-}
+hasGeoPermission().then((granted) => {
+  if (!granted) {
+    const modal = document.querySelector("#modal");
+    modal.classList.add("is-active");
+  }
+});
 
 document.querySelector("#modal-button").addEventListener("click", () => {
-  getCurrentPos();
+  setCurrentPos();
   modal.classList.remove("is-active");
 });
 
 // Map
 
-const pos = JSON.parse(localStorage.getItem("pos"));
+const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
 console.log(pos);
 const map = L.map("map").setView([pos.lat, pos.long], 13);
 L.tileLayer(
