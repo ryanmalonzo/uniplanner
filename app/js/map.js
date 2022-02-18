@@ -1,8 +1,50 @@
-let pos = JSON.parse(localStorage.getItem("pos"));
+// Functions
+
+function hasGeoPermission() {
+  navigator.geolocation.getCurrentPosition(
+    () => {},
+    (error) => {
+      return false;
+    }
+  );
+  return true;
+}
+
+function setCurrentPos() {
+  navigator.geolocation.getCurrentPosition((position, error) => {
+    const pos = {
+      lat: position.coords.latitude,
+      long: position.coords.longitude,
+    };
+    localStorage.setItem("pos", JSON.stringify(pos));
+  });
+}
+
+function getCurrentPos() {
+  return JSON.parse(localStorage.getItem("pos"));
+}
+
+function hasCurrentPos() {
+  return getCurrentPos() !== undefined;
+}
+
+// Modal
+
+if (!hasGeoPermission()) {
+  const modal = document.querySelector("#modal");
+  modal.classList.add("is-active");
+}
+
+document.querySelector("#modal-button").addEventListener("click", () => {
+  getCurrentPos();
+  modal.classList.remove("is-active");
+});
+
+// Map
+
+const pos = JSON.parse(localStorage.getItem("pos"));
 console.log(pos);
-
-let map = L.map("map").setView([pos.lat, pos.long], 13);
-
+const map = L.map("map").setView([pos.lat, pos.long], 13);
 L.tileLayer(
   "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
   {
@@ -19,7 +61,7 @@ L.tileLayer(
 
 // Items
 
-let marker = L.marker([pos.lat, pos.long]).addTo(map);
+const marker = L.marker([pos.lat, pos.long]).addTo(map);
 
 // let circle = L.circle([51.508, -0.11], {
 //   color: "red",
