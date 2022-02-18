@@ -21,6 +21,11 @@ nav {
   color: inherit;
 }
 
+/* Navbar buttons */
+#navInscription {
+  background-color: var(--green) !important;
+}
+
 .center {
   height: 100vh;
   width: 100vw;

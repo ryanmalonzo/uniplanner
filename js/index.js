@@ -8,5 +8,10 @@ button.addEventListener(
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition((position) => {
     console.log(position.coords.latitude + ", " + position.coords.longitude);
+    let pos = {
+      lat: position.coords.latitude,
+      long: position.coords.longitude,
+    };
+    localStorage.setItem("pos", JSON.stringify(pos));
   });
 }
