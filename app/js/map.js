@@ -45,24 +45,26 @@ document.querySelector("#modal-button").addEventListener("click", () => {
 
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
 console.log(pos);
+
 const map = L.map("map").setView([pos.lat, pos.long], 13);
 L.tileLayer(
-  "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-  {
-    attribution:
-      'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: "mapbox/streets-v11",
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken:
-      "pk.eyJ1IjoieXVzYS1haSIsImEiOiJja3pmeGFqNjMyeHh0Mm5ueHQ3cGluZ2x6In0.IpP_cmzbsWc8GoqNaurLLg",
-  }
+  "https://api.mapbox.com/styles/v1/yusa-ai/ckzsvx2du001e14ngnkdelz1r/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoieXVzYS1haSIsImEiOiJja3pmeDhyaWQyeGphMnZuOWU3cjFycWoxIn0.y9pV4e0r27XhX--vc6HVxA"
 ).addTo(map);
 
 // Items
 
-const marker = L.marker([pos.lat, pos.long]).addTo(map);
+// @https://github.com/pointhi/leaflet-color-markers
+let redMarker = new L.Icon({
+  iconUrl:
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+const marker = L.marker([pos.lat, pos.long], { icon: redMarker }).addTo(map);
 
 // let circle = L.circle([51.508, -0.11], {
 //   color: "red",
@@ -79,7 +81,7 @@ const marker = L.marker([pos.lat, pos.long]).addTo(map);
 
 // // Popups
 
-// marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
 // circle.bindPopup("I am a circle.");
 // polygon.bindPopup("I am a polygon.");
 
