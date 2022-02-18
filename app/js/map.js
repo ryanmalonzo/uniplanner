@@ -24,7 +24,7 @@ function setCurrentPos() {
 }
 
 function hasCurrentPos() {
-  return getCurrentPos() !== undefined || getCurrentPos() !== null;
+  return getCurrentPos() !== undefined && getCurrentPos() !== null;
 }
 
 // Modal
@@ -44,7 +44,6 @@ document.querySelector("#modal-button").addEventListener("click", () => {
 // Map
 
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
-console.log(pos);
 
 const map = L.map("map").setView([pos.lat, pos.long], 13);
 L.tileLayer(
