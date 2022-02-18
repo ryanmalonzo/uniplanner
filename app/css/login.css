@@ -2,11 +2,6 @@ body {
   background-color: var(--black);
 }
 
-/* Navbar buttons */
-.buttons > .is-primary {
-  background-color: var(--green) !important;
-}
-
 #login {
   background-color: var(--green);
   border-radius: 5px;
