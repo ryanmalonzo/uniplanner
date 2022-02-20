@@ -1,14 +1,14 @@
 $("#navConnexion").click(() => {
-  $("#login").addClass("is-active");
+  $("#login-modal").addClass("is-active");
 });
 
 $("#no-account").click(() => {
-  $("#login").removeClass("is-active");
-  $("#register").addClass("is-active");
+  $("#login-modal").removeClass("is-active");
+  $("#register-modal").addClass("is-active");
 });
 
-$("#login").click((e) => {
+$("#login-modal").click((e) => {
   if ($(e.target).hasClass("modal-background")) {
-    $("#login").removeClass("is-active");
+    $("#login-modal").removeClass("is-active");
   }
 });

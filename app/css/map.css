@@ -9,20 +9,20 @@
 }
 
 #geo,
-#login,
-#register {
+#login-modal,
+#register-modal {
   z-index: 9999;
 }
 
-#login > .modal-content,
-#register > .modal-content {
+#login-modal > .modal-content,
+#register-modal > .modal-content {
   background-color: var(--green);
   border-radius: 5px;
   padding: 80px;
 }
 
-#login > .modal-content > h1,
-#register > .modal-content > h1,
+#login-modal > .modal-content > h1,
+#register-modal > .modal-content > h1,
 .label {
   color: white;
 }
