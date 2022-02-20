@@ -79,6 +79,8 @@ let redMarker = new L.Icon({
 });
 const marker = L.marker([pos.lat, pos.long], { icon: redMarker }).addTo(map);
 
+const markerIUT = L.marker([48.842, 2.2679]).addTo(map);
+
 // let circle = L.circle([51.508, -0.11], {
 //   color: "red",
 //   fillColor: "#f03",
