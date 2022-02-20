@@ -25,7 +25,7 @@
     ></script>
 
     <!--CSS-->
-    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/map.css" />
 
     <!--Favicon-->
@@ -48,12 +48,19 @@
     />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
 
+    <script
+      src="https://kit.fontawesome.com/f0cb48158b.js"
+      crossorigin="anonymous"
+    ></script>
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Leamap</title>
   </head>
   <body>
+    <!--Navbar-->
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <p class="navbar-item"><a href="/">Leamap</a></p>
@@ -87,7 +94,7 @@
     </nav>
 
     <!--Géolocalisation-->
-    <div class="modal" id="modal">
+    <div class="modal" id="geo">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
@@ -109,6 +116,104 @@
       </div>
     </div>
 
+    <!--Connexion-->
+    <div class="modal" id="login">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <h1 class="title">Connexion</h1>
+
+        <!--Mail-->
+        <div class="field">
+          <label class="label">Adresse mail</label>
+          <div class="control has-icons-left">
+            <input class="input" type="email" placeholder="Adresse mail" />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+        <!--Mot de passe-->
+        <div class="field">
+          <label class="label">Mot de passe</label>
+          <div class="control has-icons-left">
+            <input class="input" type="password" placeholder="Mot de passe" />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+          </div>
+        </div>
+
+        <!--Se connecter-->
+        <div class="field">
+          <div class="control">
+            <button class="button is-white is-fullwidth">Se connecter</button>
+          </div>
+        </div>
+
+        <!--Inscription-->
+        <p>
+          <p class="has-text-white is-underlined" id="no-account">Pas encore de compte ?</p>
+        </p>
+      </div>
+      </div>
+    </div>
+
+    <!--Inscription-->
+    <div class="modal" id="register">
+       <div class="modal-background"></div>
+       <div class="modal-content">
+          <h1 class="title">Inscription</h1>
+
+        <!--Nom-->
+        <div class="field">
+          <label class="label">Nom</label>
+          <div class="control has-icons-left">
+            <input class="input" type="text" placeholder="Nom" />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-id-card"></i>
+            </span>
+          </div>
+        </div>
+
+        <!--Mail-->
+        <div class="field">
+          <label class="label">Adresse mail</label>
+          <div class="control has-icons-left">
+            <input class="input" type="email" placeholder="Adresse mail" />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+        <!--Mot de passe-->
+        <div class="field">
+          <label class="label">Mot de passe</label>
+          <div class="control has-icons-left">
+            <input class="input" type="password" placeholder="Mot de passe" />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+          </div>
+        </div>
+
+        <!--S'inscrire-->
+        <div class="field">
+          <div class="control">
+            <button class="button is-white is-fullwidth">S'inscrire</button>
+          </div>
+        </div>
+
+        <!--Connexion-->
+        <p>
+          <p class="has-text-white is-underlined" id="has-account">Déjà un compte ?</p>
+        </p>
+      </div>
+       </div>
+    </div>
+    
+    <!--Map-->
     <div
       class="is-flex is-justify-content-center is-align-items-center"
       id="wrapper"
@@ -116,8 +221,10 @@
       <div class="center" id="map"></div>
     </div>
 
-    <script type="module" src="../js/firebase.js"></script>
-    <script src="../js/global.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script type="module" src="../firebase.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/register.js"></script>
     <script src="./js/map.js"></script>
   </body>
 </html>
