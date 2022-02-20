@@ -64,7 +64,8 @@
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <p class="navbar-item"><a href="/">Leamap</a></p>
-        <a
+        <!--TODO toggle or replace-->
+        <!-- <a
           role="button"
           class="navbar-burger"
           aria-label="menu"
@@ -74,7 +75,7 @@
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a>
+        </a> -->
       </div>
 
       <div id="navbar" class="navbar-menu">
@@ -117,7 +118,7 @@
     </div>
 
     <!--Connexion-->
-    <div class="modal" id="login">
+    <div class="modal" id="login-modal">
       <div class="modal-background"></div>
       <div class="modal-content">
         <h1 class="title">Connexion</h1>
@@ -147,7 +148,7 @@
         <!--Se connecter-->
         <div class="field">
           <div class="control">
-            <button class="button is-white is-fullwidth">Se connecter</button>
+            <button class="button is-white is-fullwidth" id="login-btn">Se connecter</button>
           </div>
         </div>
 
@@ -160,13 +161,13 @@
     </div>
 
     <!--Inscription-->
-    <div class="modal" id="register">
+    <div class="modal" id="register-modal">
        <div class="modal-background"></div>
        <div class="modal-content">
           <h1 class="title">Inscription</h1>
 
         <!--Nom-->
-        <div class="field">
+        <!-- <div class="field">
           <label class="label">Nom</label>
           <div class="control has-icons-left">
             <input class="input" type="text" placeholder="Nom" />
@@ -174,7 +175,7 @@
               <i class="fa-solid fa-id-card"></i>
             </span>
           </div>
-        </div>
+        </div> -->
 
         <!--Mail-->
         <div class="field">
@@ -201,7 +202,7 @@
         <!--S'inscrire-->
         <div class="field">
           <div class="control">
-            <button class="button is-white is-fullwidth">S'inscrire</button>
+            <button class="button is-white is-fullwidth" id="register-btn">S'inscrire</button>
           </div>
         </div>
 
@@ -223,8 +224,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
     <script type="module" src="../firebase.js"></script>
-    <script src="./js/login.js"></script>
-    <script src="./js/register.js"></script>
-    <script src="./js/map.js"></script>
+    <script type="module" src="./js/login.js"></script>
+    <script type="module" src="./js/register.js"></script>
+    <script type="module" src="./js/map.js"></script>
   </body>
 </html>

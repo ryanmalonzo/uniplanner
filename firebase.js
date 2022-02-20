@@ -1,4 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA-QzwHQoJyMn86RRlXCPUYTFQcsZJ3bsk",
@@ -10,3 +15,24 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+export const login = async (email, password) => {
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+export const register = async (email, password) => {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((res) => {
+      const user = res.user;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
