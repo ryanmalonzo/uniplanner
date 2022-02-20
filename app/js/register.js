@@ -1,12 +1,10 @@
-const btnInscription = document.querySelector("#navInscription");
-btnInscription.addEventListener("click", () => {
-  document.querySelector("#register").classList.add("is-active");
+$("#navInscription").click(() => {
+  $("#register").addClass("is-active");
 });
 
-const hasAccount = document.querySelector("#has-account");
-hasAccount.addEventListener("click", () => {
-  document.querySelector("#register").classList.remove("is-active");
-  document.querySelector("#login").classList.add("is-active");
+$("#has-account").click(() => {
+  $("#register").removeClass("is-active");
+  $("#login").addClass("is-active");
 });
 
 $("#register").click((e) => {
