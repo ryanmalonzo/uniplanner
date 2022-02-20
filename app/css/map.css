@@ -8,8 +8,32 @@
   z-index: 9999;
 }
 
-#modal {
+#geo,
+#login,
+#register {
   z-index: 9999;
+}
+
+#login > .modal-content,
+#register > .modal-content {
+  background-color: var(--green);
+  border-radius: 5px;
+  padding: 80px;
+}
+
+#login > .modal-content > h1,
+#register > .modal-content > h1,
+.label {
+  color: white;
+}
+
+.label {
+  font-weight: bolder;
+}
+
+#no-account,
+#has-account {
+  cursor: pointer;
 }
 
 #map {
