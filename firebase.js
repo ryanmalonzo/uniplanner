@@ -3,7 +3,14 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA-QzwHQoJyMn86RRlXCPUYTFQcsZJ3bsk",
@@ -16,23 +23,41 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-export const login = async (email, password) => {
-  signInWithEmailAndPassword(auth, email, password)
+export const login = async (email, pwd) => {
+  await signInWithEmailAndPassword(auth, email, pwd)
     .then((userCredential) => {
-      const user = userCredential.user;
+      localStorage.setItem("currentUser", JSON.stringify(userCredential.user));
     })
-    .catch((error) => {
-      console.error(error);
+    .catch((err) => {
+      console.error(err);
     });
 };
 
-export const register = async (email, password) => {
-  createUserWithEmailAndPassword(auth, email, password)
+export const register = async (name, email, pwd) => {
+  await createUserWithEmailAndPassword(auth, email, pwd)
     .then((res) => {
       const user = res.user;
+      setDoc(doc(db, "users", user.uid), {
+        name, // name: name
+      });
     })
-    .catch((error) => {
-      console.error(error);
+    .catch((err) => {
+      console.error(err);
     });
+};
+
+export const getNom = async (user) => {
+  return new Promise((resolve) => {
+    getDoc(doc(db, "users", user.uid)).then((snap) => {
+      resolve(snap.data().name);
+    });
+  });
+};
+
+export const logout = async () => {
+  await signOut(auth).then(() => {
+    localStorage.removeItem("currentUser");
+  });
 };
