@@ -1,6 +1,6 @@
 import { register } from "../../firebase.js";
 
-$("#navInscription").click(() => {
+$("#nav-inscription").click(() => {
   $("#register-modal").addClass("is-active");
 });
 
@@ -16,5 +16,5 @@ $("#register-modal").click((e) => {
 });
 
 $("#register-btn").click(async () => {
-  register("ryan2@ryanmalonzo.fr", "test1234");
+  register("ryan@ryanmalonzo.fr", "test1234");
 });

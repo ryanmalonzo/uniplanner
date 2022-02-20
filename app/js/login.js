@@ -1,4 +1,4 @@
-$("#navConnexion").click(() => {
+$("#nav-connexion").click(() => {
   $("#login-modal").addClass("is-active");
 });
 
