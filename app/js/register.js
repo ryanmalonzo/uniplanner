@@ -16,5 +16,15 @@ $("#register-modal").click((e) => {
 });
 
 $("#register-btn").click(async () => {
-  register("ryan@ryanmalonzo.fr", "test1234");
+  const nom = $("#register-nom").val();
+  const mail = $("#register-mail").val();
+  const mdp = $("#register-mdp").val();
+
+  if (nom && mail && mdp) {
+    await register(nom, mail, mdp).then(() => {
+      location.reload();
+    });
+  } else {
+    console.error("L'un des champs est vide.");
+  }
 });

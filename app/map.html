@@ -25,7 +25,6 @@
     ></script>
 
     <!--CSS-->
-    <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/map.css" />
 
     <!--Favicon-->
@@ -79,6 +78,9 @@
       </div>
 
       <div id="navbar" class="navbar-menu">
+        <div class="navbar-start">
+          <p class="navbar-item" id="nav-nom"></p>
+        </div>
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
@@ -88,6 +90,7 @@
               <button class="button is-light" id="nav-connexion">
                 Connexion
               </button>
+              <button class="button is-danger" id="nav-deconnexion">Déconnexion</button>
             </div>
           </div>
         </div>
@@ -127,7 +130,7 @@
         <div class="field">
           <label class="label">Adresse mail</label>
           <div class="control has-icons-left">
-            <input class="input" type="email" placeholder="Adresse mail" />
+            <input class="input" type="email" placeholder="Adresse mail" id="login-mail" />
             <span class="icon is-small is-left">
               <i class="fa-solid fa-envelope"></i>
             </span>
@@ -138,7 +141,7 @@
         <div class="field">
           <label class="label">Mot de passe</label>
           <div class="control has-icons-left">
-            <input class="input" type="password" placeholder="Mot de passe" />
+            <input class="input" type="password" placeholder="Mot de passe" id="login-mdp" />
             <span class="icon is-small is-left">
               <i class="fa-solid fa-lock"></i>
             </span>
@@ -167,21 +170,21 @@
           <h1 class="title">Inscription</h1>
 
         <!--Nom-->
-        <!-- <div class="field">
+        <div class="field">
           <label class="label">Nom</label>
           <div class="control has-icons-left">
-            <input class="input" type="text" placeholder="Nom" />
+            <input class="input" type="text" placeholder="Nom" id="register-nom" />
             <span class="icon is-small is-left">
               <i class="fa-solid fa-id-card"></i>
             </span>
           </div>
-        </div> -->
+        </div>
 
         <!--Mail-->
         <div class="field">
           <label class="label">Adresse mail</label>
           <div class="control has-icons-left">
-            <input class="input" type="email" placeholder="Adresse mail" />
+            <input class="input" type="email" placeholder="Adresse mail" id="register-mail" />
             <span class="icon is-small is-left">
               <i class="fa-solid fa-envelope"></i>
             </span>
@@ -192,7 +195,7 @@
         <div class="field">
           <label class="label">Mot de passe</label>
           <div class="control has-icons-left">
-            <input class="input" type="password" placeholder="Mot de passe" />
+            <input class="input" type="password" placeholder="Mot de passe" id="register-mdp" />
             <span class="icon is-small is-left">
               <i class="fa-solid fa-lock"></i>
             </span>
@@ -226,6 +229,7 @@
     <script type="module" src="../firebase.js"></script>
     <script type="module" src="./js/login.js"></script>
     <script type="module" src="./js/register.js"></script>
+    <script type="module" src="./js/logout.js"></script>
     <script type="module" src="./js/map.js"></script>
   </body>
 </html>

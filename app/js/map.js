@@ -1,3 +1,17 @@
+import { getNom } from "../../firebase.js";
+
+// Get user
+
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+if (currentUser) {
+  $("#nav-inscription").hide();
+  $("#nav-connexion").hide();
+  $("#nav-deconnexion").show();
+
+  const nom = await getNom(currentUser);
+  $("#nav-nom").text(`Bienvenue, ${nom}`);
+}
+
 // Functions
 
 function hasGeoPermission() {
