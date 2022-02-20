@@ -1,12 +1,10 @@
-const btnConnexion = document.querySelector("#navConnexion");
-btnConnexion.addEventListener("click", () => {
-  document.querySelector("#login").classList.add("is-active");
+$("#navConnexion").click(() => {
+  $("#login").addClass("is-active");
 });
 
-const noAccount = document.querySelector("#no-account");
-noAccount.addEventListener("click", () => {
-  document.querySelector("#login").classList.remove("is-active");
-  document.querySelector("#register").classList.add("is-active");
+$("#no-account").click(() => {
+  $("#login").removeClass("is-active");
+  $("#register").addClass("is-active");
 });
 
 $("#login").click((e) => {
