@@ -37,11 +37,12 @@ export const login = async (email, pwd) => {
 
 export const register = async (name, email, pwd) => {
   await createUserWithEmailAndPassword(auth, email, pwd)
-    .then((res) => {
+    .then(async (res) => {
       const user = res.user;
-      setDoc(doc(db, "users", user.uid), {
+      await setDoc(doc(db, "users", user.uid), {
         name, // name: name
       });
+      localStorage.setItem("currentUser", JSON.stringify(user));
     })
     .catch((err) => {
       console.error(err);
