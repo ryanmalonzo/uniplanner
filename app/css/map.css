@@ -78,3 +78,24 @@ nav {
   width: 100vw;
   position: relative;
 }
+
+/* Ecrase breakpoint 1024px de Bulma sur les navbar */
+@media screen and (min-width: 0px) and (max-width: 1023px) {
+  .navbar > * {
+    border-radius: 7px;
+  }
+
+  .navbar,
+  .navbar-end,
+  .navbar-menu,
+  .navbar-start {
+    display: flex;
+    flex-grow: 1;
+    background-color: inherit;
+    align-items: center;
+  }
+
+  .navbar-item {
+    color: white;
+  }
+}
