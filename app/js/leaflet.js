@@ -55,10 +55,13 @@ marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
 
 // let popup = L.popup();
 
-function onMapClick(e) {
-  // console.log(e);
+const onMapClick = (e) => {
   const { lat, lng } = e.latlng;
-  L.marker([lat, lng]).addTo(map);
-}
+  const marker = L.marker([lat, lng]).addTo(map);
+  marker.on("contextmenu", () => {
+    map.removeLayer(marker);
+  });
+};
 
 map.on("click", onMapClick);
+map.on("contextmenu", () => {}); // disable browser context menu
