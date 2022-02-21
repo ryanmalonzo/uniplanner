@@ -45,7 +45,7 @@ nav {
   display: none;
 }
 
-#geo,
+#geo-modal,
 #login-modal,
 #register-modal {
   z-index: 9999;
