@@ -9,6 +9,9 @@ L.tileLayer(
   "https://api.mapbox.com/styles/v1/yusa-ai/ckzsvx2du001e14ngnkdelz1r/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoieXVzYS1haSIsImEiOiJja3pmeDhyaWQyeGphMnZuOWU3cjFycWoxIn0.y9pV4e0r27XhX--vc6HVxA"
 ).addTo(map);
 
+console.log(map.zoomControl);
+map.zoomControl.setPosition("bottomright");
+
 // Items
 
 // @https://github.com/pointhi/leaflet-color-markers
@@ -57,7 +60,7 @@ marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
 
 const onMapClick = (e) => {
   const { lat, lng } = e.latlng;
-  const marker = L.marker([lat, lng]).addTo(map);
+  const marker = L.marker([lat, lng], { icon: redMarker }).addTo(map);
   marker.on("contextmenu", () => {
     map.removeLayer(marker);
   });
