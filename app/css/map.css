@@ -95,6 +95,10 @@ nav {
     align-items: center;
   }
 
+  .navbar-end {
+    justify-content: right;
+  }
+
   .navbar-item {
     color: white;
   }
