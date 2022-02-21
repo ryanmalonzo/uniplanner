@@ -45,14 +45,14 @@ function hasCurrentPos() {
 
 hasGeoPermission().then((granted) => {
   if (!granted) {
-    const modal = document.querySelector("#modal");
+    const modal = document.querySelector("#geo-modal");
     modal.classList.add("is-active");
   }
 });
 
-document.querySelector("#modal-button").addEventListener("click", () => {
+document.querySelector("#geo-modal-button").addEventListener("click", () => {
   setCurrentPos();
-  modal.classList.remove("is-active");
+  $("#geo-modal").removeClass("is-active");
 });
 
 // Map
