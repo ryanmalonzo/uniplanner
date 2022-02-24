@@ -5,7 +5,7 @@ import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./map.js";
 // TODO refresh first time or delay load
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
 
-if (!pos.lat || !pos.long) {
+if (!pos || !pos.lat || !pos.long) {
   // IUT
   pos.lat = 48.842;
   pos.long = 2.2679;
