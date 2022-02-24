@@ -28,11 +28,25 @@ export function getCurrentPos() {
 
 export function setCurrentPos() {
   navigator.geolocation.getCurrentPosition((position) => {
-    const pos = {
-      lat: position.coords.latitude,
-      long: position.coords.longitude,
-    };
-    localStorage.setItem("pos", JSON.stringify(pos));
+    if (position) {
+      localStorage.setItem(
+        "pos",
+        JSON.stringify({
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+        })
+      );
+    } else {
+      localStorage.setItem(
+        "pos",
+        JSON.stringify({
+          // IUT
+          lat: 48.842,
+          long: 2.2679,
+        })
+      );
+    }
+    location.reload();
     return getCurrentPos();
   });
 }
@@ -47,11 +61,6 @@ hasGeoPermission().then((granted) => {
   if (!granted) {
     const modal = document.querySelector("#geo-modal");
     modal.classList.add("is-active");
-    const pos = {
-      lat: 48.842,
-      long: 2.2679,
-    };
-    localStorage.setItem("pos", JSON.stringify(pos));
   }
 });
 

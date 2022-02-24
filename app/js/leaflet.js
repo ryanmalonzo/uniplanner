@@ -4,8 +4,15 @@ import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./map.js";
 
 // TODO refresh first time or delay load
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
+const iut = {
+  lat: 48.842,
+  long: 2.2679,
+};
 
-const map = L.map("map", { minZoom: 12 }).setView([pos.lat, pos.long], 13);
+const map = L.map("map", { minZoom: 13 }).setView(
+  [pos?.lat || iut.lat, pos?.long || iut.long],
+  13 // zoom
+);
 L.tileLayer(
   "https://api.mapbox.com/styles/v1/yusa-ai/ckzsvx2du001e14ngnkdelz1r/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoieXVzYS1haSIsImEiOiJja3pmeDhyaWQyeGphMnZuOWU3cjFycWoxIn0.y9pV4e0r27XhX--vc6HVxA"
 ).addTo(map);
@@ -25,7 +32,9 @@ let redMarker = new L.Icon({
   popupAnchor: [1, -34],
   shadowSize: [41, 41],
 });
-const marker = L.marker([pos.lat, pos.long], { icon: redMarker }).addTo(map);
+const marker = L.marker([pos?.lat || iut.lat, pos?.long || iut.long], {
+  icon: redMarker,
+}).addTo(map);
 
 //const markerIUT = L.marker([48.842, 2.2679]).addTo(map);
 
