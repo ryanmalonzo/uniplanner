@@ -1,20 +1,21 @@
 import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./map.js";
+import { loggedIn } from "../../firebase.js";
 
 // Map
 
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
 // position par défaut
 const iut = {
-  lat: 48.842,
-  long: 2.2679,
+	lat: 48.842,
+	long: 2.2679,
 };
 
 const map = L.map("map", { minZoom: 13 }).setView(
-  [pos?.lat || iut.lat, pos?.long || iut.long],
-  13 // zoom
+	[pos?.lat || iut.lat, pos?.long || iut.long],
+	13 // zoom
 );
 L.tileLayer(
-  "https://api.mapbox.com/styles/v1/yusa-ai/ckzsvx2du001e14ngnkdelz1r/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoieXVzYS1haSIsImEiOiJja3pmeDhyaWQyeGphMnZuOWU3cjFycWoxIn0.y9pV4e0r27XhX--vc6HVxA"
+	"https://api.mapbox.com/styles/v1/yusa-ai/ckzsvx2du001e14ngnkdelz1r/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoieXVzYS1haSIsImEiOiJja3pmeDhyaWQyeGphMnZuOWU3cjFycWoxIn0.y9pV4e0r27XhX--vc6HVxA"
 ).addTo(map);
 
 map.zoomControl.setPosition("bottomright");
@@ -23,17 +24,17 @@ map.zoomControl.setPosition("bottomright");
 
 // @https://github.com/pointhi/leaflet-color-markers
 let redMarker = new L.Icon({
-  iconUrl:
-    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
-  shadowUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
+	iconUrl:
+		"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+	shadowUrl:
+		"https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+	iconSize: [25, 41],
+	iconAnchor: [12, 41],
+	popupAnchor: [1, -34],
+	shadowSize: [41, 41],
 });
 const marker = L.marker([pos?.lat || iut.lat, pos?.long || iut.long], {
-  icon: redMarker,
+	icon: redMarker,
 }).addTo(map);
 
 //const markerIUT = L.marker([48.842, 2.2679]).addTo(map);
@@ -67,13 +68,17 @@ marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
 
 // let popup = L.popup();
 
-const onMapClick = (e) => {
-  const { lat, lng } = e.latlng;
-  const marker = L.marker([lat, lng], { icon: redMarker }).addTo(map);
-  marker.on("contextmenu", () => {
-    map.removeLayer(marker);
-  });
+const placeMarker = (e) => {
+	const { lat, lng } = e.latlng;
+	const marker = L.marker([lat, lng], { icon: redMarker }).addTo(map);
+
+	// Suppression marqueur
+	marker.on("contextmenu", () => {
+		map.removeLayer(marker);
+	});
 };
 
-map.on("click", onMapClick);
-map.on("contextmenu", () => {}); // disable browser context menu
+if (loggedIn()) {
+	map.on("click", placeMarker);
+	map.on("contextmenu", () => {}); // disable browser context menu
+}
