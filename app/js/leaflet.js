@@ -2,6 +2,7 @@ import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./map.js";
 
 // Map
 
+// TODO refresh first time or delay load
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
 
 const map = L.map("map", { minZoom: 13 }).setView([pos.lat, pos.long], 13);
