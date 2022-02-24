@@ -1,6 +1,6 @@
 :root {
 	--black: #181818;
-	--green: #209cee;
+	--blue: #209cee;
 }
 
 .center {
@@ -33,7 +33,7 @@ nav {
 
 /* Navbar buttons */
 #nav-inscription {
-	background-color: var(--green) !important;
+	background-color: var(--blue) !important;
 }
 
 .navbar {
@@ -58,7 +58,7 @@ nav {
 
 #login-modal > .modal-content,
 #register-modal > .modal-content {
-	background-color: var(--green);
+	background-color: var(--blue);
 	border-radius: 5px;
 	padding: 80px;
 }
