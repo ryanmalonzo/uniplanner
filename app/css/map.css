@@ -1,105 +1,110 @@
 :root {
-  /* Spotify */
-  --black: #181818;
-  --green: #1db954;
+	--black: #181818;
+	--green: #209cee;
 }
 
 .center {
-  height: 100vh;
-  width: 100vw;
+	height: 100vh;
+	width: 100vw;
 }
 
 html {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 nav {
-  background-color: var(--black) !important;
+	background-color: var(--black) !important;
+}
+
+#logo {
+	width: 40px;
+	height: 40px;
+	margin: 10px 0 10px 18px;
 }
 
 .navbar-brand > .navbar-item {
-  font-family: "Overpass", sans-serif;
-  font-size: 30px;
+	font-family: "Pacifico", cursive;
+	font-size: 30px;
 }
 
 .navbar-brand > .navbar-item > a {
-  color: inherit;
+	color: inherit;
 }
 
 /* Navbar buttons */
 #nav-inscription {
-  background-color: var(--green) !important;
+	background-color: var(--green) !important;
 }
 
 .navbar {
-  position: absolute;
-  border-radius: 7px;
-  left: 0;
-  right: 0;
-  margin: 15px auto 0 auto;
-  width: 87.5%;
-  z-index: 9999;
+	position: absolute;
+	border-radius: 7px;
+	left: 0;
+	right: 0;
+	margin: 15px auto 0 auto;
+	width: 87.5%;
+	z-index: 9999;
 }
 
 #nav-deconnexion {
-  display: none;
+	display: none;
 }
 
 #geo-modal,
 #login-modal,
 #register-modal {
-  z-index: 9999;
+	z-index: 9999;
 }
 
 #login-modal > .modal-content,
 #register-modal > .modal-content {
-  background-color: var(--green);
-  border-radius: 5px;
-  padding: 80px;
+	background-color: var(--green);
+	border-radius: 5px;
+	padding: 80px;
 }
 
 #login-modal > .modal-content > h1,
 #register-modal > .modal-content > h1,
 .label {
-  color: white;
+	color: white;
 }
 
 .label {
-  font-weight: bolder;
+	font-weight: bolder;
 }
 
 #no-account,
 #has-account {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 #map {
-  height: 100vh;
-  width: 100vw;
-  position: relative;
+	height: 100vh;
+	width: 100vw;
+	position: relative;
 }
 
 /* Ecrase breakpoint 1024px de Bulma sur les navbar */
 @media screen and (min-width: 0px) and (max-width: 1023px) {
-  .navbar > * {
-    border-radius: 7px;
-  }
+	.navbar > * {
+		border-radius: 7px;
+	}
 
-  .navbar,
-  .navbar-end,
-  .navbar-menu,
-  .navbar-start {
-    display: flex;
-    flex-grow: 1;
-    background-color: inherit;
-    align-items: center;
-  }
+	.navbar,
+	.navbar-end,
+	.navbar-menu,
+	.navbar-start {
+		display: flex;
+		flex-grow: 1;
+		background-color: inherit;
+		align-items: center;
+	}
 
-  .navbar-end {
-    justify-content: right;
-  }
+	.navbar-end {
+		justify-content: right;
+	}
 
-  .navbar-item {
-    color: white;
-  }
+	.navbar-item {
+		color: white;
+	}
 }
