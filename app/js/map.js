@@ -47,6 +47,11 @@ hasGeoPermission().then((granted) => {
   if (!granted) {
     const modal = document.querySelector("#geo-modal");
     modal.classList.add("is-active");
+    const pos = {
+      lat: 48.842,
+      long: 2.2679,
+    };
+    localStorage.setItem("pos", JSON.stringify(pos));
   }
 });
 
