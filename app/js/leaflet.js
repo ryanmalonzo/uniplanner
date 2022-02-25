@@ -3,6 +3,7 @@ import { loggedIn } from "../../firebase.js";
 
 // Map
 
+// TODO use GeoPoint from Firebase
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
 // position par défaut
 const iut = {

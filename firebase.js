@@ -10,6 +10,7 @@ import {
 	doc,
 	setDoc,
 	getDoc,
+	GeoPoint,
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 
 const firebaseConfig = {
