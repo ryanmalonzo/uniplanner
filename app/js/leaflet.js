@@ -67,14 +67,22 @@ marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
 
 // let popup = L.popup();
 
+const markers = new Array();
+
 const placeMarker = (e) => {
 	const { lat, lng } = e.latlng;
+
+	// Ajout sur la carte
 	const marker = L.marker([lat, lng], { icon: redMarker }).addTo(map);
 
-	// Suppression marqueur
+	// Programmation de la suppression
 	marker.on("contextmenu", () => {
 		map.removeLayer(marker);
+		const index = markers.indexOf(marker);
+		markers.splice(index, 1);
 	});
+
+	markers.push(marker);
 };
 
 if (loggedIn()) {
