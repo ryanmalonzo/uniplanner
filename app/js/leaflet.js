@@ -1,18 +1,13 @@
 import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./geolocation.js";
-import { loggedIn } from "../../firebase.js";
+import { loggedIn, GeoPoint } from "../../firebase.js";
 
 // Map
 
-// TODO use GeoPoint from Firebase
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
-// position par défaut
-const iut = {
-	lat: 48.842,
-	long: 2.2679,
-};
+const iut = new GeoPoint(48.842, 2.2679); // position par défaut
 
 const map = L.map("map", { minZoom: 13 }).setView(
-	[pos?.lat || iut.lat, pos?.long || iut.long],
+	[pos?.latitude || iut.latitude, pos?.longitude || iut.longitude],
 	13 // zoom
 );
 L.tileLayer(
@@ -34,9 +29,12 @@ let redMarker = new L.Icon({
 	popupAnchor: [1, -34],
 	shadowSize: [41, 41],
 });
-const marker = L.marker([pos?.lat || iut.lat, pos?.long || iut.long], {
-	icon: redMarker,
-}).addTo(map);
+const marker = L.marker(
+	[pos?.latitude || iut.latitude, pos?.longitude || iut.longitude],
+	{
+		icon: redMarker,
+	}
+).addTo(map);
 
 //const markerIUT = L.marker([48.842, 2.2679]).addTo(map);
 

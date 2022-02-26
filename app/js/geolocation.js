@@ -1,3 +1,5 @@
+import { GeoPoint } from "../../firebase.js";
+
 function hasGeoPermission() {
 	return new Promise((resolve) => {
 		navigator.permissions.query({ name: "geolocation" }).then((result) => {
@@ -7,7 +9,8 @@ function hasGeoPermission() {
 }
 
 function getCurrentPos() {
-	return JSON.parse(localStorage.getItem("pos"));
+	const pos = JSON.parse(localStorage.getItem("pos"));
+	return new GeoPoint(pos.latitude, pos.longitude);
 }
 
 function setCurrentPos() {
@@ -15,19 +18,14 @@ function setCurrentPos() {
 		if (position) {
 			localStorage.setItem(
 				"pos",
-				JSON.stringify({
-					lat: position.coords.latitude,
-					long: position.coords.longitude,
-				})
+				JSON.stringify(
+					new GeoPoint(position.coords.latitude, position.coords.longitude)
+				)
 			);
 		} else {
 			localStorage.setItem(
 				"pos",
-				JSON.stringify({
-					// IUT
-					lat: 48.842,
-					long: 2.2679,
-				})
+				JSON.stringify(new GeoPoint(48.842, 2.2679)) // IUT
 			);
 		}
 		location.reload();

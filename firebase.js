@@ -26,7 +26,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-export const login = async (email, pwd) => {
+const login = async (email, pwd) => {
 	await signInWithEmailAndPassword(auth, email, pwd)
 		.then((userCredential) => {
 			localStorage.setItem("currentUser", JSON.stringify(userCredential.user));
@@ -36,7 +36,7 @@ export const login = async (email, pwd) => {
 		});
 };
 
-export const register = async (name, email, pwd) => {
+const register = async (name, email, pwd) => {
 	await createUserWithEmailAndPassword(auth, email, pwd)
 		.then(async (res) => {
 			const user = res.user;
@@ -50,7 +50,7 @@ export const register = async (name, email, pwd) => {
 		});
 };
 
-export const getNom = async (user) => {
+const getNom = async (user) => {
 	return new Promise((resolve) => {
 		getDoc(doc(db, "users", user.uid)).then((snap) => {
 			resolve(snap.data().name);
@@ -58,12 +58,14 @@ export const getNom = async (user) => {
 	});
 };
 
-export const logout = async () => {
+const logout = async () => {
 	await signOut(auth).then(() => {
 		localStorage.removeItem("currentUser");
 	});
 };
 
-export const loggedIn = () => {
+const loggedIn = () => {
 	return JSON.parse(localStorage.getItem("currentUser"));
 };
+
+export { login, register, getNom, logout, loggedIn, GeoPoint };
