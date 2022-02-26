@@ -58,7 +58,7 @@ nav {
 
 #login-modal > .modal-content,
 #register-modal > .modal-content {
-	background-color: var(--blue);
+	background-color: var(--black);
 	border-radius: 5px;
 	padding: 80px;
 }
