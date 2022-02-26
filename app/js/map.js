@@ -1,6 +1,7 @@
 import { getNom, loggedIn } from "../../firebase.js";
+import { hasGeoPermission, setCurrentPos } from "./geolocation.js";
 
-// Get user
+// Récupère utilisateur courant (if any)
 
 const currentUser = loggedIn();
 if (currentUser) {
@@ -12,50 +13,9 @@ if (currentUser) {
 	$("#nav-nom").text(`Bienvenue, ${nom}`);
 }
 
-// Functions
+// Modals
 
-function hasGeoPermission() {
-	return new Promise((resolve) => {
-		navigator.permissions.query({ name: "geolocation" }).then((result) => {
-			resolve(result.state === "granted");
-		});
-	});
-}
-
-export function getCurrentPos() {
-	return JSON.parse(localStorage.getItem("pos"));
-}
-
-export function setCurrentPos() {
-	navigator.geolocation.getCurrentPosition((position) => {
-		if (position) {
-			localStorage.setItem(
-				"pos",
-				JSON.stringify({
-					lat: position.coords.latitude,
-					long: position.coords.longitude,
-				})
-			);
-		} else {
-			localStorage.setItem(
-				"pos",
-				JSON.stringify({
-					// IUT
-					lat: 48.842,
-					long: 2.2679,
-				})
-			);
-		}
-		location.reload();
-		return getCurrentPos();
-	});
-}
-
-export function hasCurrentPos() {
-	return getCurrentPos() !== undefined && getCurrentPos() !== null;
-}
-
-// Modal
+// MODAL Avertissement géolocalisation
 
 hasGeoPermission().then((granted) => {
 	if (!granted) {
@@ -67,4 +27,40 @@ hasGeoPermission().then((granted) => {
 document.querySelector("#geo-modal-button").addEventListener("click", () => {
 	setCurrentPos();
 	$("#geo-modal").removeClass("is-active");
+});
+
+// MODAL Connexion
+
+$("#nav-connexion").click(() => {
+	$("#login-modal").addClass("is-active"); // active modal Bulma
+});
+
+$("#no-account").click(() => {
+	// Ferme formulaire connexion et ouvre formulaire inscription
+	$("#login-modal").removeClass("is-active");
+	$("#register-modal").addClass("is-active");
+});
+
+// Ferme le formulaire de connexion lorsqu'on clique en dehors
+$("#login-modal").click((e) => {
+	if ($(e.target).hasClass("modal-background")) {
+		$("#login-modal").removeClass("is-active");
+	}
+});
+
+// MODAL Inscription
+
+$("#nav-inscription").click(() => {
+	$("#register-modal").addClass("is-active");
+});
+
+$("#has-account").click(() => {
+	$("#register-modal").removeClass("is-active");
+	$("#login-modal").addClass("is-active");
+});
+
+$("#register-modal").click((e) => {
+	if ($(e.target).hasClass("modal-background")) {
+		$("#register-modal").removeClass("is-active");
+	}
 });

@@ -1,4 +1,4 @@
-import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./map.js";
+import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./geolocation.js";
 import { loggedIn } from "../../firebase.js";
 
 // Map
