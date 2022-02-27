@@ -101,7 +101,3 @@ $("#add-marker").click(() => {
 		});
 	}
 });
-
-$("#search-address").click(() => {
-	alert("Ça marche pas, casse-toi");
-});

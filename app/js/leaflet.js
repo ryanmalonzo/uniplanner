@@ -49,8 +49,10 @@ const placeMarker = (e, popupText) => {
 	marker.bindPopup(popupText);
 
 	// Plus besoin de la variable en local storage
-	localStorage.removeItem("popup");
-	$("#popup-text").val("");
+	if (localStorage.getItem("popup")) {
+		localStorage.removeItem("popup");
+		$("#popup-text").val("");
+	}
 
 	// Programmation de la suppression
 	marker.on("contextmenu", () => {
@@ -95,3 +97,30 @@ if (loggedIn()) {
 	});
 	map.on("contextmenu", () => {}); // disable browser context menu
 }
+
+$("#search-address").click(() => {
+	// Fetch coordinates from address
+	axios
+		.get("https://api-adresse.data.gouv.fr/search/", {
+			params: {
+				q: $("#search-text").val(),
+				limit: 1,
+			},
+		})
+		.then((response) => {
+			const coords = response.data.features[0].geometry.coordinates;
+
+			placeMarker(
+				{
+					latlng: { lat: coords[1], lng: coords[0] },
+				},
+				$("#search-text").val()
+			);
+			planSync();
+
+			$("#search-text").val("");
+		})
+		.catch((error) => {
+			console.error(error);
+		});
+});
