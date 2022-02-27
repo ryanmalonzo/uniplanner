@@ -1,5 +1,13 @@
 import { getNom, loggedIn } from "../../firebase.js";
 import { hasGeoPermission, setCurrentPos } from "./geolocation.js";
+import * as bulmaToast from "../lib/rfoel/bulma-toast.js";
+
+// bulmaToast.setDefaults({
+// 	duration: 3000,
+// 	position: "bottom-right",
+// 	closeOnClick: true,
+// 	animate: { in: "fadeIn", out: "fadeOut" },
+// });
 
 // Récupère utilisateur courant (if any)
 
@@ -11,6 +19,8 @@ if (currentUser) {
 
 	const nom = await getNom(currentUser);
 	$("#nav-username").text(`${nom}`);
+
+	$("#user-toolbar").show();
 }
 
 // Modals
@@ -76,4 +86,22 @@ $("#register-modal").click((e) => {
 	if ($(e.target).hasClass("modal-background")) {
 		$("#register-modal").removeClass("is-active");
 	}
+});
+
+// User toolbar
+
+$("#add-marker").click(() => {
+	const popupText = $("#popup-text").val();
+	if (popupText) {
+		localStorage.setItem("popup", popupText);
+	} else {
+		bulmaToast.toast({
+			message: "Merci de saisir une description pour votre marqueur.",
+			type: "is-danger",
+		});
+	}
+});
+
+$("#search-address").click(() => {
+	alert("Ça marche pas, casse-toi");
 });

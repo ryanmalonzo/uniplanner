@@ -5,7 +5,6 @@ bulmaToast.setDefaults({
 	duration: 3000,
 	position: "bottom-right",
 	closeOnClick: true,
-	animate: { in: "fadeIn", out: "fadeOut" },
 });
 
 // Messages d'erreur Firebase

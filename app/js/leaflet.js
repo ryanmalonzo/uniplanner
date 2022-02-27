@@ -36,44 +36,24 @@ const marker = L.marker(
 	}
 ).addTo(map);
 
-//const markerIUT = L.marker([48.842, 2.2679]).addTo(map);
-
-// let circle = L.circle([51.508, -0.11], {
-//   color: "red",
-//   fillColor: "#f03",
-//   fillOpacity: 0.5,
-//   radius: 500,
-// }).addTo(map);
-
-// let polygon = L.polygon([
-//   [51.509, -0.08],
-//   [51.503, -0.06],
-//   [51.51, -0.047],
-// ]).addTo(map);
-
-// // Popups
+// Popups
 
 marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
-// circle.bindPopup("I am a circle.");
-// polygon.bindPopup("I am a polygon.");
 
-// // Auto-closing popup
-// // var popup = L.popup()
-// //   .setLatLng([51.513, -0.09])
-// //   .setContent("I am a standalone popup.")
-// //   .openOn(map);
-
-// // Events
-
-// let popup = L.popup();
+// Functions
 
 let timer;
 
-const placeMarker = (e) => {
+const placeMarker = (e, popupText) => {
 	const { lat, lng } = e.latlng;
 
 	// Ajout sur la carte
 	const marker = L.marker([lat, lng], { icon: redMarker }).addTo(map);
+	marker.bindPopup(popupText);
+
+	// Plus besoin de la variable en local storage
+	localStorage.removeItem("popup");
+	$("#popup-text").val("");
 
 	// Programmation de la suppression
 	marker.on("contextmenu", () => {
@@ -85,7 +65,7 @@ const placeMarker = (e) => {
 		}
 	});
 
-	markers.push(marker);
+	markers.push({ coords: { latitude: lat, longitude: lng }, popup: popupText });
 };
 
 const planSync = () => {
@@ -94,21 +74,27 @@ const planSync = () => {
 		synchronize(oldMarkers, markers);
 		markers = await getMarkers();
 		oldMarkers = [...markers];
-	}, 3 * 1000);
+	}, 1000);
 };
 
 let markers = await getMarkers();
 $.each(markers, (undefined, marker) => {
-	placeMarker({
-		latlng: { lat: marker.coords.latitude, lng: marker.coords.longitude },
-	});
+	placeMarker(
+		{
+			latlng: { lat: marker.coords.latitude, lng: marker.coords.longitude },
+		},
+		marker.popup
+	);
 });
 let oldMarkers = [...markers]; // copie
 
 if (loggedIn()) {
 	map.on("click", (e) => {
-		placeMarker(e);
-		planSync();
+		const popupText = localStorage.getItem("popup");
+		if (popupText) {
+			placeMarker(e, popupText);
+			planSync();
+		}
 	});
 	map.on("contextmenu", () => {}); // disable browser context menu
 }

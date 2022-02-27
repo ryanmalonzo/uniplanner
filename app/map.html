@@ -55,10 +55,6 @@
 			src="https://kit.fontawesome.com/f0cb48158b.js"
 			crossorigin="anonymous"
 		></script>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-		/>
 
 		<meta name="title" content="Uniplanner" />
 		<meta
@@ -104,7 +100,7 @@
 			<div id="navbar" class="navbar-menu">
 				<div class="navbar-start">
 					<p id="nav-username" class="navbar-item"></p>
-					<p id="nav-about" class="navbar-item">À propos</p>
+					<p id="nav-about" class="navbar-item is-clickable">À propos</p>
 				</div>
 				<div class="navbar-end">
 					<div class="navbar-item">
@@ -112,10 +108,10 @@
 							<button class="button is-primary" id="nav-inscription">
 								<strong>Inscription</strong>
 							</button>
-							<button class="button is-light" id="nav-connexion">
+							<button class="button is-white" id="nav-connexion">
 								Connexion
 							</button>
-							<button class="button is-danger" id="nav-deconnexion">
+							<button class="button is-white" id="nav-deconnexion">
 								Déconnexion
 							</button>
 						</div>
@@ -307,6 +303,30 @@
 		>
 			<div class="center" id="map"></div>
 		</div>
+
+		<!--Controls-->
+		<footer class="footer">
+			<div id="user-toolbar">
+				<div class="control is-flex is-flex-direction-row">
+					<input
+						id="popup-text"
+						class="input"
+						type="text"
+						placeholder="Description du marqueur..."
+					/>
+					<button id="add-marker" class="button is-dark">Ajouter</button>
+				</div>
+				<div class="control is-flex is-flex-direction-row">
+					<input
+						id="search-text"
+						class="input"
+						type="text"
+						placeholder="Adresse..."
+					/>
+					<button id="search-address" class="button is-dark">Chercher</button>
+				</div>
+			</div>
+		</footer>
 
 		<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
 		<script type="module" src="../firebase.js"></script>
