@@ -83,7 +83,7 @@ const synchronize = (oldMarkers, newMarkers) => {
 	const removed = oldMarkers.filter((m) => !newMarkers.find((e) => m == e));
 	const added = newMarkers.filter((m) => !oldMarkers.find((e) => m == e));
 
-	// Supprime les marqueurs de la BDD
+	// Retire de la BDD les marqueurs supprimés localement
 	$.each(removed, async (undefined, marker) => {
 		const { lat, lng } = marker.getLatLng();
 		const q = query(
