@@ -10,10 +10,23 @@ if (currentUser) {
 	$("#nav-deconnexion").show();
 
 	const nom = await getNom(currentUser);
-	$("#nav-nom").text(`Bienvenue, ${nom}`);
+	$("#nav-username").text(`${nom}`);
 }
 
 // Modals
+
+// MODAL À propos
+
+$("#nav-about").click(() => {
+	$("#about-modal").addClass("is-active");
+});
+
+// Ferme le modal lorsqu'on clique en dehors
+$("#about-modal").click((e) => {
+	if ($(e.target).hasClass("modal-background")) {
+		$("#about-modal").removeClass("is-active");
+	}
+});
 
 // MODAL Avertissement géolocalisation
 

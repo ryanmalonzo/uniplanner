@@ -31,6 +31,10 @@ nav {
 	color: inherit;
 }
 
+#nav-about {
+	cursor: pointer;
+}
+
 /* Navbar buttons */
 #nav-inscription {
 	background-color: var(--blue) !important;
@@ -50,6 +54,7 @@ nav {
 	display: none;
 }
 
+#about-modal,
 #geo-modal,
 #login-modal,
 #register-modal {
