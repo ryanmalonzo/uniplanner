@@ -10,6 +10,9 @@ function hasGeoPermission() {
 
 function getCurrentPos() {
 	const pos = JSON.parse(localStorage.getItem("pos"));
+	if (pos === undefined || pos === null) {
+		return null;
+	}
 	return new GeoPoint(pos.latitude, pos.longitude);
 }
 
@@ -34,7 +37,7 @@ function setCurrentPos() {
 }
 
 function hasCurrentPos() {
-	return getCurrentPos() !== undefined && getCurrentPos() !== null;
+	return getCurrentPos() !== null;
 }
 
 export { hasGeoPermission, getCurrentPos, setCurrentPos, hasCurrentPos };
