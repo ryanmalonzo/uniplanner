@@ -33,27 +33,19 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const login = async (email, pwd) => {
-	await signInWithEmailAndPassword(auth, email, pwd)
-		.then((userCredential) => {
-			localStorage.setItem("currentUser", JSON.stringify(userCredential.user));
-		})
-		.catch((err) => {
-			console.error(err);
-		});
+	await signInWithEmailAndPassword(auth, email, pwd).then((userCredential) => {
+		localStorage.setItem("currentUser", JSON.stringify(userCredential.user));
+	});
 };
 
 const register = async (name, email, pwd) => {
-	await createUserWithEmailAndPassword(auth, email, pwd)
-		.then(async (res) => {
-			const user = res.user;
-			await setDoc(doc(db, "users", user.uid), {
-				name, // name: name
-			});
-			localStorage.setItem("currentUser", JSON.stringify(user));
-		})
-		.catch((err) => {
-			console.error(err);
+	await createUserWithEmailAndPassword(auth, email, pwd).then(async (res) => {
+		const user = res.user;
+		await setDoc(doc(db, "users", user.uid), {
+			name, // name: name
 		});
+		localStorage.setItem("currentUser", JSON.stringify(user));
+	});
 };
 
 const getNom = async (user) => {

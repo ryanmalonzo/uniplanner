@@ -1,11 +1,28 @@
-import * as toast from "../lib/rfoel/bulma-toast.js";
+import * as bulmaToast from "../lib/rfoel/bulma-toast.js";
 import { register, login, logout } from "../../firebase.js";
 
-toast.setDefaults({
-	duration: 2000,
+bulmaToast.setDefaults({
+	duration: 3000,
 	position: "bottom-right",
 	closeOnClick: true,
+	animate: { in: "fadeIn", out: "fadeOut" },
 });
+
+// Messages d'erreur Firebase
+const errorMsg = (error) => {
+	switch (error.code) {
+		case "auth/invalid-email":
+			return "Adresse mail invalide.";
+		case "auth/wrong-password":
+			return "Mot de passe incorrect.";
+		case "auth/user-not-found":
+			return "Utilisateur inconnu.";
+		case "auth/weak-password":
+			return "Votre mot de passe doit faire au moins 6 caractères.";
+		default:
+			return error.message;
+	}
+};
 
 // Inscription
 $("#register-btn").click(async () => {
@@ -13,13 +30,37 @@ $("#register-btn").click(async () => {
 	const mail = $("#register-mail").val();
 	const mdp = $("#register-mdp").val();
 
-	if (nom && mail && mdp) {
-		await register(nom, mail, mdp).then(() => {
-			location.reload();
+	if (!nom) {
+		bulmaToast.toast({
+			message: "Veuillez saisir votre nom.",
+			type: "is-danger",
 		});
-	} else {
-		console.error("L'un des champs est vide.");
+		return;
 	}
+
+	if (!mail) {
+		bulmaToast.toast({
+			message: "Veuillez saisir votre adresse mail.",
+			type: "is-danger",
+		});
+		return;
+	}
+
+	if (!mdp) {
+		bulmaToast.toast({
+			message: "Veuillez saisir votre mot de passe.",
+			type: "is-danger",
+		});
+		return;
+	}
+
+	await register(nom, mail, mdp)
+		.then(() => {
+			location.reload();
+		})
+		.catch((error) => {
+			bulmaToast.toast({ message: errorMsg(error), type: "is-danger" });
+		});
 });
 
 // Connexion
@@ -27,13 +68,29 @@ $("#login-btn").click(async () => {
 	const mail = $("#login-mail").val();
 	const mdp = $("#login-mdp").val();
 
-	if (mail && mdp) {
-		login(mail, mdp).then(() => {
-			location.reload();
+	if (!mail) {
+		bulmaToast.toast({
+			message: "Veuillez saisir votre adresse mail.",
+			type: "is-danger",
 		});
-	} else {
-		console.error("L'un des champs est vide.");
+		return;
 	}
+
+	if (!mdp) {
+		bulmaToast.toast({
+			message: "Veuillez saisir votre mot de passe.",
+			type: "is-danger",
+		});
+		return;
+	}
+
+	login(mail, mdp)
+		.then(() => {
+			location.reload();
+		})
+		.catch((error) => {
+			bulmaToast.toast({ message: errorMsg(error), type: "is-danger" });
+		});
 });
 
 // Déconnexion
