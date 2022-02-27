@@ -4,10 +4,10 @@ import { loggedIn, GeoPoint, getMarkers, synchronize } from "../../firebase.js";
 // Map
 
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
-const iut = new GeoPoint(48.842, 2.2679); // position par défaut
+const center = new GeoPoint(48.864716, 2.349014); // centre de Paris
 
 const map = L.map("map", { minZoom: 13 }).setView(
-	[pos?.latitude || iut.latitude, pos?.longitude || iut.longitude],
+	[pos?.latitude || center.latitude, pos?.longitude || center.longitude],
 	13 // zoom
 );
 L.tileLayer(
@@ -29,16 +29,13 @@ let redMarker = new L.Icon({
 	popupAnchor: [1, -34],
 	shadowSize: [41, 41],
 });
-const marker = L.marker(
-	[pos?.latitude || iut.latitude, pos?.longitude || iut.longitude],
-	{
+
+if (pos) {
+	const marker = L.marker([pos.latitude, pos.longitude], {
 		icon: redMarker,
-	}
-).addTo(map);
-
-// Popups
-
-marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
+	}).addTo(map);
+	marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
+}
 
 // Functions
 

@@ -25,11 +25,6 @@ function setCurrentPos() {
 					new GeoPoint(position.coords.latitude, position.coords.longitude)
 				)
 			);
-		} else {
-			localStorage.setItem(
-				"pos",
-				JSON.stringify(new GeoPoint(48.842, 2.2679)) // IUT
-			);
 		}
 		location.reload();
 		return getCurrentPos();
