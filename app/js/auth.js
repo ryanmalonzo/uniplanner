@@ -1,4 +1,11 @@
+import * as toast from "../lib/rfoel/bulma-toast.js";
 import { register, login, logout } from "../../firebase.js";
+
+toast.setDefaults({
+	duration: 2000,
+	position: "bottom-right",
+	closeOnClick: true,
+});
 
 // Inscription
 $("#register-btn").click(async () => {
