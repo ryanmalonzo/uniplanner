@@ -1,5 +1,5 @@
 import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./geolocation.js";
-import { loggedIn, GeoPoint } from "../../firebase.js";
+import { loggedIn, GeoPoint, getMarkers, synchronize } from "../../firebase.js";
 
 // Map
 
@@ -67,7 +67,7 @@ marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
 
 // let popup = L.popup();
 
-const markers = new Array();
+let timer;
 
 const placeMarker = (e) => {
 	const { lat, lng } = e.latlng;
@@ -77,15 +77,38 @@ const placeMarker = (e) => {
 
 	// Programmation de la suppression
 	marker.on("contextmenu", () => {
-		map.removeLayer(marker);
-		const index = markers.indexOf(marker);
-		markers.splice(index, 1);
+		if (loggedIn()) {
+			map.removeLayer(marker);
+			const index = markers.indexOf(marker);
+			markers.splice(index, 1); // supprime le marqueur
+			planSync();
+		}
 	});
 
 	markers.push(marker);
 };
 
+const planSync = () => {
+	clearTimeout(timer);
+	timer = setTimeout(async () => {
+		synchronize(oldMarkers, markers);
+		markers = await getMarkers();
+		oldMarkers = [...markers];
+	}, 3 * 1000);
+};
+
+let markers = await getMarkers();
+$.each(markers, (undefined, marker) => {
+	placeMarker({
+		latlng: { lat: marker.coords.latitude, lng: marker.coords.longitude },
+	});
+});
+let oldMarkers = [...markers]; // copie
+
 if (loggedIn()) {
-	map.on("click", placeMarker);
+	map.on("click", (e) => {
+		placeMarker(e);
+		planSync();
+	});
 	map.on("contextmenu", () => {}); // disable browser context menu
 }

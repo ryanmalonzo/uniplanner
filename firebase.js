@@ -8,8 +8,14 @@ import {
 import {
 	getFirestore,
 	doc,
+	addDoc,
 	setDoc,
 	getDoc,
+	getDocs,
+	collection,
+	query,
+	where,
+	deleteDoc,
 	GeoPoint,
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 
@@ -68,4 +74,52 @@ const loggedIn = () => {
 	return JSON.parse(localStorage.getItem("currentUser"));
 };
 
-export { login, register, getNom, logout, loggedIn, GeoPoint };
+const getMarkers = async () => {
+	const q = query(collection(db, "markers"));
+	const snap = await getDocs(q);
+
+	const markers = new Array();
+	snap.forEach((doc) => {
+		markers.push(doc.data());
+	});
+	return markers;
+};
+
+const synchronize = (oldMarkers, newMarkers) => {
+	console.log("Synchronizing markers to database...");
+
+	const removed = oldMarkers.filter((m) => !newMarkers.find((e) => m == e));
+	const added = newMarkers.filter((m) => !oldMarkers.find((e) => m == e));
+
+	// Supprime les marqueurs de la BDD
+	$.each(removed, async (undefined, marker) => {
+		const { lat, lng } = marker.getLatLng();
+		const q = query(
+			collection(db, "markers"),
+			where("coords", "==", new GeoPoint(lat, lng))
+		);
+		const snap = await getDocs(q);
+		snap.forEach(async (m) => {
+			await deleteDoc(doc(db, "markers", m.id));
+		});
+	});
+
+	// Ajoute les nouveaux marqueurs
+	$.each(added, async (undefined, marker) => {
+		const { lat, lng } = marker.getLatLng();
+		await addDoc(collection(db, "markers"), {
+			coords: new GeoPoint(lat, lng),
+		});
+	});
+};
+
+export {
+	login,
+	register,
+	getNom,
+	logout,
+	loggedIn,
+	GeoPoint,
+	getMarkers,
+	synchronize,
+};
