@@ -58,7 +58,7 @@ nav {
 
 #login-modal > .modal-content,
 #register-modal > .modal-content {
-	background-color: var(--black);
+	background-color: rgba(255, 255, 255, 0.1);
 	border-radius: 5px;
 	padding: 80px;
 }
