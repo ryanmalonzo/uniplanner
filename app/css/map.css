@@ -44,7 +44,7 @@ nav {
 	right: 0;
 	margin: 15px auto 0 auto;
 	width: 87.5%;
-	z-index: 9999;
+	z-index: 9997;
 }
 
 #nav-deconnexion {
@@ -52,10 +52,12 @@ nav {
 }
 
 #about-modal,
-#geo-modal,
+#geo-modal {
+	z-index: 9999;
+}
 #login-modal,
 #register-modal {
-	z-index: 9999;
+	z-index: 9998;
 }
 
 #login-modal > .modal-content,
