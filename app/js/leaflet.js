@@ -109,8 +109,8 @@ $("#search-address").click(() => {
 		})
 		.then((response) => {
 			const coords = response.data.features[0].geometry.coordinates;
-			const lat = coords[1],
-				lng = coords[0];
+			const lat = coords[1];
+			const lng = coords[0];
 
 			const marker = L.marker([lat, lng]).addTo(map);
 			marker.bindPopup($("#search-text").val()).openPopup();

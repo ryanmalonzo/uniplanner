@@ -81,7 +81,9 @@
 			<div
 				class="navbar-brand is-flex is-flex-direction-row is-align-items-center"
 			>
-				<img id="logo" src="./assets/logo.jpg" alt="Logo uniplanner" />
+				<a href="/" class="is-flex"
+					><img id="logo" src="./assets/logo.jpg" alt="Logo uniplanner"
+				/></a>
 				<p class="navbar-item"><a href="/">uniplanner</a></p>
 				<!--TODO toggle or replace-->
 				<!-- <a
@@ -306,6 +308,10 @@
 
 		<!--Controls-->
 		<footer class="footer">
+			<figure id="marker-selector" class="image is-128x128">
+				<img src="./assets/red-marker.png" />
+			</figure>
+
 			<div id="user-toolbar">
 				<div class="control is-flex is-flex-direction-row">
 					<input
@@ -314,7 +320,7 @@
 						type="text"
 						placeholder="Description du marqueur"
 					/>
-					<button id="add-marker" class="button is-dark">Ajouter</button>
+					<button id="add-marker" class="button is-info">Ajouter</button>
 				</div>
 				<div class="control is-flex is-flex-direction-row">
 					<input
@@ -323,7 +329,7 @@
 						type="text"
 						placeholder="Adresse postale"
 					/>
-					<button id="search-address" class="button is-dark">Chercher</button>
+					<button id="search-address" class="button is-info">Chercher</button>
 				</div>
 			</div>
 		</footer>

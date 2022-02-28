@@ -102,6 +102,16 @@ nav {
 	width: 400px;
 }
 
+#marker-selector {
+	/* display: none; */
+	padding: 10px;
+	margin-bottom: 10px;
+	background-color: var(--black);
+	border-radius: 7px;
+	width: 100px;
+	height: 100px;
+}
+
 .footer .control > * {
 	margin: 2px;
 }
