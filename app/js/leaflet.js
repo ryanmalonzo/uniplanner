@@ -6,7 +6,11 @@ import { username, GeoPoint, getMarkers, synchronize } from "../../firebase.js";
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
 const center = new GeoPoint(48.864716, 2.349014); // centre de Paris
 
-const map = L.map("map", { minZoom: 7 }).setView(
+const map = L.map("map", {
+	minZoom: 7,
+	zoomControl: false,
+	attributionControl: false,
+}).setView(
 	[pos?.latitude || center.latitude, pos?.longitude || center.longitude],
 	13 // zoom
 );
@@ -14,7 +18,7 @@ L.tileLayer(
 	"https://api.mapbox.com/styles/v1/yusa-ai/ckzsvx2du001e14ngnkdelz1r/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoieXVzYS1haSIsImEiOiJja3pmeDhyaWQyeGphMnZuOWU3cjFycWoxIn0.y9pV4e0r27XhX--vc6HVxA"
 ).addTo(map);
 
-map.zoomControl.setPosition("bottomright");
+// map.zoomControl.setPosition("bottomright");
 
 // Items
 
