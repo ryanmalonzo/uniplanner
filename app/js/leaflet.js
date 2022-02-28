@@ -6,7 +6,7 @@ import { loggedIn, GeoPoint, getMarkers, synchronize } from "../../firebase.js";
 const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
 const center = new GeoPoint(48.864716, 2.349014); // centre de Paris
 
-const map = L.map("map", { minZoom: 13 }).setView(
+const map = L.map("map", { minZoom: 7 }).setView(
 	[pos?.latitude || center.latitude, pos?.longitude || center.longitude],
 	13 // zoom
 );
