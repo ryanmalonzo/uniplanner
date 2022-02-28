@@ -19,6 +19,7 @@ const errorMsg = (error) => {
 		case "auth/weak-password":
 			return "Votre mot de passe doit faire au moins 6 caractères.";
 		default:
+			console.log(error);
 			return error.message;
 	}
 };
@@ -54,9 +55,7 @@ $("#register-btn").click(async () => {
 	}
 
 	await register(nom, mail, mdp)
-		.then(() => {
-			location.reload();
-		})
+		.then(() => location.reload())
 		.catch((error) => {
 			bulmaToast.toast({ message: errorMsg(error), type: "is-danger" });
 		});
@@ -83,10 +82,8 @@ $("#login-btn").click(async () => {
 		return;
 	}
 
-	login(mail, mdp)
-		.then(() => {
-			location.reload();
-		})
+	await login(mail, mdp)
+		.then(() => location.reload())
 		.catch((error) => {
 			bulmaToast.toast({ message: errorMsg(error), type: "is-danger" });
 		});
@@ -95,6 +92,5 @@ $("#login-btn").click(async () => {
 // Déconnexion
 
 $("#nav-deconnexion").click(async () => {
-	await logout();
-	location.reload();
+	await logout().then(() => location.reload());
 });

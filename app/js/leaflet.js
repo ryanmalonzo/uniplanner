@@ -1,5 +1,5 @@
 import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./geolocation.js";
-import { loggedIn, GeoPoint, getMarkers, synchronize } from "../../firebase.js";
+import { username, GeoPoint, getMarkers, synchronize } from "../../firebase.js";
 
 // Map
 
@@ -56,7 +56,7 @@ const placeMarker = (e, popupText) => {
 
 	// Programmation de la suppression
 	marker.on("contextmenu", () => {
-		if (loggedIn()) {
+		if (username) {
 			map.removeLayer(marker);
 			const index = markers.indexOf(marker);
 			markers.splice(index, 1); // supprime le marqueur
@@ -87,7 +87,7 @@ $.each(markers, (undefined, marker) => {
 });
 let oldMarkers = [...markers]; // copie
 
-if (loggedIn()) {
+if (username) {
 	map.on("click", (e) => {
 		const popupText = localStorage.getItem("popup");
 		if (popupText) {

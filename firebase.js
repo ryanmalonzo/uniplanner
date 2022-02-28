@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
 import {
 	getAuth,
+	onAuthStateChanged,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 	signOut,
@@ -35,21 +36,7 @@ const db = getFirestore(app);
 
 enableIndexedDbPersistence(db).catch((err) => console.error(err));
 
-const login = async (email, pwd) => {
-	await signInWithEmailAndPassword(auth, email, pwd).then((userCredential) => {
-		localStorage.setItem("currentUser", JSON.stringify(userCredential.user));
-	});
-};
-
-const register = async (name, email, pwd) => {
-	await createUserWithEmailAndPassword(auth, email, pwd).then(async (res) => {
-		const user = res.user;
-		await setDoc(doc(db, "users", user.uid), {
-			name, // name: name
-		});
-		localStorage.setItem("currentUser", JSON.stringify(user));
-	});
-};
+let username = localStorage.getItem("username");
 
 const getNom = async (user) => {
 	return new Promise((resolve) => {
@@ -59,14 +46,26 @@ const getNom = async (user) => {
 	});
 };
 
-const logout = async () => {
-	await signOut(auth).then(() => {
-		localStorage.removeItem("currentUser");
+const login = async (email, pwd) => {
+	await signInWithEmailAndPassword(auth, email, pwd).then(async (res) => {
+		const username = await getNom(res.user);
+		localStorage.setItem("username", username);
 	});
 };
 
-const loggedIn = () => {
-	return JSON.parse(localStorage.getItem("currentUser"));
+const register = async (name, email, pwd) => {
+	await createUserWithEmailAndPassword(auth, email, pwd).then(async (res) => {
+		const user = res.user;
+		await setDoc(doc(db, "users", user.uid), {
+			name, // name: name
+		});
+		const username = await getNom(user);
+		localStorage.setItem("username", username);
+	});
+};
+
+const logout = async () => {
+	await signOut(auth).then(() => localStorage.removeItem("username"));
 };
 
 const getMarkers = async () => {
@@ -111,13 +110,4 @@ const synchronize = (oldMarkers, newMarkers) => {
 	});
 };
 
-export {
-	login,
-	register,
-	getNom,
-	logout,
-	loggedIn,
-	GeoPoint,
-	getMarkers,
-	synchronize,
-};
+export { login, register, username, logout, GeoPoint, getMarkers, synchronize };

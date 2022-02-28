@@ -1,4 +1,4 @@
-import { getNom, loggedIn } from "../../firebase.js";
+import { username } from "../../firebase.js";
 import { hasGeoPermission, setCurrentPos } from "./geolocation.js";
 import * as bulmaToast from "../lib/rfoel/bulma-toast.js";
 
@@ -11,14 +11,12 @@ import * as bulmaToast from "../lib/rfoel/bulma-toast.js";
 
 // Récupère utilisateur courant (if any)
 
-const currentUser = loggedIn();
-if (currentUser) {
+if (username) {
 	$("#nav-inscription").hide();
 	$("#nav-connexion").hide();
 	$("#nav-deconnexion").show();
 
-	const nom = await getNom(currentUser);
-	$("#nav-username").text(`${nom}`);
+	$("#nav-username").text(`${username}`);
 
 	$("#user-toolbar").show();
 }
