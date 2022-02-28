@@ -17,6 +17,7 @@ import {
 	where,
 	deleteDoc,
 	GeoPoint,
+	enableIndexedDbPersistence,
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -31,6 +32,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
+enableIndexedDbPersistence(db).catch((err) => console.error(err));
 
 const login = async (email, pwd) => {
 	await signInWithEmailAndPassword(auth, email, pwd).then((userCredential) => {
