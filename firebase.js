@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
 import {
 	getAuth,
-	onAuthStateChanged,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 	signOut,
@@ -21,8 +20,10 @@ import {
 	enableIndexedDbPersistence,
 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 
+import { API_KEY } from "./config.js";
+
 const firebaseConfig = {
-	apiKey: "***REMOVED***",
+	apiKey: API_KEY.FIREBASE,
 	authDomain: "leamap-d7b0e.firebaseapp.com",
 	projectId: "leamap-d7b0e",
 	storageBucket: "leamap-d7b0e.appspot.com",
