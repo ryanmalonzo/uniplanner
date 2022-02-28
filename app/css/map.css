@@ -108,8 +108,8 @@ nav {
 	margin-bottom: 10px;
 	background-color: var(--black);
 	border-radius: 7px;
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 }
 
 .footer .control > * {
