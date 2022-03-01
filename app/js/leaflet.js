@@ -36,35 +36,35 @@ const red = new L.Icon({
 const frenchFries = L.divIcon({
 	html: twemoji.parse("\uD83C\uDF5F"),
 	iconSize: [36, 36],
-	iconAnchor: [18, 10],
+	popupAnchor: [-3, -12],
 	className: "dummy",
 });
 
 const beerMugs = L.divIcon({
 	html: twemoji.parse("\ud83c\udf7b"),
 	iconSize: [36, 36],
-	iconAnchor: [18, 10],
+	popupAnchor: [0, -12],
 	className: "dummy",
 });
 
 const shoppingCart = L.divIcon({
 	html: twemoji.parse("\uD83D\uDED2"),
 	iconSize: [36, 36],
-	iconAnchor: [18, 10],
+	popupAnchor: [0, -6],
 	className: "dummy",
 });
 
 const nationalPark = L.divIcon({
 	html: twemoji.parse("\uD83C\uDFDE"),
 	iconSize: [36, 36],
-	iconAnchor: [18, 10],
+	popupAnchor: [-3, -12],
 	className: "dummy",
 });
 
 const books = L.divIcon({
 	html: twemoji.parse("\uD83D\uDCDA"),
 	iconSize: [36, 36],
-	iconAnchor: [18, 10],
+	popupAnchor: [0, -12],
 	className: "dummy",
 });
 
