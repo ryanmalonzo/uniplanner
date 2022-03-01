@@ -28,7 +28,7 @@
 		></script>
 
 		<!--CSS-->
-		<link rel="stylesheet" href="./css/map.css" />
+		<link rel="stylesheet" href="./css/index.css" />
 
 		<!--Favicon-->
 		<link
@@ -308,13 +308,16 @@
 
 		<!--Controls-->
 		<footer class="footer">
-			<figure id="marker-selector" class="image is-128x128 is-clickable">
-				<img
-					id="marker-selector-image"
-					src="./assets/markers/red-marker.png"
-					alt="Image marqueur"
-				/>
-			</figure>
+			<div id="marker-toolbar" class="is-flex is-align-items-end">
+				<figure id="marker-selector" class="image is-128x128 is-clickable">
+					<img
+						id="marker-selector-image"
+						src="./assets/markers/red-marker.png"
+						alt="Image marqueur"
+					/>
+				</figure>
+				<div id="marker-text"><p>Marqueur par défaut</p></div>
+			</div>
 
 			<div id="user-toolbar">
 				<div class="control is-flex is-flex-direction-row">

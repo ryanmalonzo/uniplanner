@@ -92,14 +92,20 @@ nav {
 	bottom: 15px;
 	padding: 0;
 	background-color: transparent;
+	pointer-events: none;
 }
 
 #user-toolbar {
+	pointer-events: auto;
 	display: none;
 	padding: 10px;
 	background-color: var(--black);
 	border-radius: 7px;
 	width: 400px;
+}
+
+#marker-toolbar > * {
+	margin: 2px;
 }
 
 #marker-selector {
@@ -110,6 +116,22 @@ nav {
 	border-radius: 7px;
 	width: 80px;
 	height: 80px;
+}
+
+#marker-text {
+	display: flex;
+	align-items: center;
+	color: white;
+	padding: 0 5px 0 5px;
+	font-size: 15px;
+	font-weight: bolder;
+	pointer-events: auto;
+	width: 200px;
+	height: 30px;
+	background-color: var(--black);
+	border-radius: 7px;
+	margin-bottom: 10px;
+	width: fit-content;
 }
 
 .footer .control > * {

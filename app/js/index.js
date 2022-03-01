@@ -81,23 +81,29 @@ $("#register-modal").click((e) => {
 });
 
 const markers = [
-	"./assets/markers/red-marker.png",
-	"./assets/markers/french-fries.png",
-	"./assets/markers/clinking-beer-mugs.png",
-	"./assets/markers/shopping-cart.png",
-	"./assets/markers/national-park.png",
-	"./assets/markers/books.png",
+	{ src: "./assets/markers/red-marker.png", desc: "Marqueur par défaut" },
+	{ src: "./assets/markers/french-fries.png", desc: "Restaurant" },
+	{ src: "./assets/markers/clinking-beer-mugs.png", desc: "Bar" },
+	{ src: "./assets/markers/shopping-cart.png", desc: "Supermarché" },
+	{ src: "./assets/markers/national-park.png", desc: "Parc" },
+	{ src: "./assets/markers/books.png", desc: "Bibliothèque" },
 ];
 
 // Marker selector
 
 $("#marker-selector").click(() => {
-	const index = markers.indexOf($("#marker-selector-image").attr("src"));
+	let index = markers.findIndex((marker) => {
+		return marker.src === $("#marker-selector-image").attr("src");
+	});
+
 	if (index < markers.length - 1) {
-		$("#marker-selector-image").attr("src", markers[index + 1]);
+		++index;
+		$("#marker-selector-image").attr("src", markers[index].src);
 	} else {
-		$("#marker-selector-image").attr("src", markers[0]);
+		index = 0;
+		$("#marker-selector-image").attr("src", markers[index].src);
 	}
+	$("#marker-text > p").text(markers[index].desc);
 });
 
 // User toolbar
