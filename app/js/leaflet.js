@@ -196,6 +196,12 @@ $("#search-address").click(() => {
 			marker.bindPopup($("#search-text").val()).openPopup();
 			map.panTo([lat, lng]); // centre la carte sur le point
 
+			marker.on("contextmenu", () => {
+				if (username) {
+					map.removeLayer(marker);
+				}
+			});
+
 			$("#search-text").val("");
 		})
 		.catch((error) => {
