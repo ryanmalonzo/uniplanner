@@ -35,7 +35,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// enableIndexedDbPersistence(db).catch((err) => console.error(err));
+enableIndexedDbPersistence(db).catch((err) => console.error(err));
 
 let username = localStorage.getItem("username");
 
