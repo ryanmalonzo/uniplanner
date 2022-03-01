@@ -35,7 +35,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-enableIndexedDbPersistence(db).catch((err) => console.error(err));
+// enableIndexedDbPersistence(db).catch((err) => console.error(err));
 
 let username = localStorage.getItem("username");
 
@@ -73,18 +73,26 @@ const getMarkers = async () => {
 	const q = query(collection(db, "markers"));
 	const snap = await getDocs(q);
 
-	const markers = new Array();
+	const mk = new Array();
 	snap.forEach((doc) => {
-		markers.push(doc.data());
+		console.log(doc.data().popup);
+		mk.push(doc.data());
 	});
-	return markers;
+	return mk;
 };
 
 const synchronize = (oldMarkers, newMarkers) => {
 	console.log("Synchronizing markers to database...");
+	console.log(oldMarkers);
+	console.log(newMarkers);
 
-	const removed = oldMarkers.filter((m) => !newMarkers.find((e) => m == e));
-	const added = newMarkers.filter((m) => !oldMarkers.find((e) => m == e));
+	const removed = oldMarkers.filter((m) => !newMarkers.find((e) => m === e));
+	const added = newMarkers.filter((m) => !oldMarkers.find((e) => m === e));
+
+	console.log("Removed:");
+	console.log(removed);
+	console.log("Added:");
+	console.log(added);
 
 	// Retire de la BDD les marqueurs supprimés localement
 	$.each(removed, async (undefined, marker) => {

@@ -154,6 +154,10 @@ const planSync = () => {
 	clearTimeout(timer);
 	timer = setTimeout(async () => {
 		synchronize(oldMarkers, markers);
+
+		// markers = new Array();
+		// oldMarkers = new Array();
+
 		markers = await getMarkers();
 		oldMarkers = [...markers];
 	}, 1000);
