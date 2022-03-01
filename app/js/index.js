@@ -2,13 +2,6 @@ import { username } from "../../firebase.js";
 import { hasGeoPermission, setCurrentPos } from "./geolocation.js";
 import * as bulmaToast from "../lib/rfoel/bulma-toast.js";
 
-// bulmaToast.setDefaults({
-// 	duration: 3000,
-// 	position: "bottom-right",
-// 	closeOnClick: true,
-// 	animate: { in: "fadeIn", out: "fadeOut" },
-// });
-
 // Récupère utilisateur courant (if any)
 
 if (username) {
@@ -16,8 +9,9 @@ if (username) {
 	$("#nav-connexion").hide();
 	$("#nav-deconnexion").show();
 
-	$("#nav-username").text(`${username}`);
+	$("#nav-username").text(username);
 
+	$("#marker-selector").show();
 	$("#user-toolbar").show();
 }
 
@@ -83,6 +77,26 @@ $("#has-account").click(() => {
 $("#register-modal").click((e) => {
 	if ($(e.target).hasClass("modal-background")) {
 		$("#register-modal").removeClass("is-active");
+	}
+});
+
+const markers = [
+	"./assets/markers/red-marker.png",
+	"./assets/markers/french-fries.png",
+	"./assets/markers/clinking-beer-mugs.png",
+	"./assets/markers/shopping-cart.png",
+	"./assets/markers/national-park.png",
+	"./assets/markers/books.png",
+];
+
+// Marker selector
+
+$("#marker-selector").click(() => {
+	const index = markers.indexOf($("#marker-selector-image").attr("src"));
+	if (index < markers.length - 1) {
+		$("#marker-selector-image").attr("src", markers[index + 1]);
+	} else {
+		$("#marker-selector-image").attr("src", markers[0]);
 	}
 });
 

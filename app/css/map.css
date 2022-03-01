@@ -103,7 +103,7 @@ nav {
 }
 
 #marker-selector {
-	/* display: none; */
+	display: none;
 	padding: 10px;
 	margin-bottom: 10px;
 	background-color: var(--black);
