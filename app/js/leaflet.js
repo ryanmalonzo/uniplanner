@@ -128,6 +128,11 @@ const placeMarker = (e, popupText, ico) => {
 		$("#popup-text").val("");
 	}
 
+	// Reset bouton ajout
+	$("#add-marker").html("Ajouter");
+	$("#add-marker").removeClass("is-dark");
+	$("#add-marker").addClass("is-info");
+
 	// Programmation de la suppression
 	marker.on("contextmenu", () => {
 		if (username) {
