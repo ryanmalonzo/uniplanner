@@ -107,6 +107,7 @@ const synchronize = (oldMarkers, newMarkers) => {
 		await addDoc(collection(db, "markers"), {
 			coords: new GeoPoint(marker.coords.latitude, marker.coords.longitude),
 			popup: marker.popup,
+			icon: marker.icon,
 		});
 	});
 };

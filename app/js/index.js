@@ -106,9 +106,7 @@ $("#marker-selector").click(() => {
 
 $("#add-marker").click(() => {
 	const popupText = $("#popup-text").val();
-	if (popupText) {
-		localStorage.setItem("popup", popupText);
-	} else {
+	if (!popupText || popupText === "") {
 		bulmaToast.toast({
 			message: "Merci de saisir une description pour votre marqueur.",
 			type: "is-danger",

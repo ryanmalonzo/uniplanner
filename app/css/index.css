@@ -142,6 +142,11 @@ nav {
 	min-width: 90px;
 }
 
+img.emoji {
+	width: 30px;
+	height: 30px;
+}
+
 /* Ecrase breakpoint 1024px de Bulma sur les navbar */
 @media screen and (min-width: 0px) and (max-width: 1023px) {
 	.navbar > * {

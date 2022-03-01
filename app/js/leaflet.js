@@ -20,41 +20,111 @@ L.tileLayer(
 
 // map.zoomControl.setPosition("bottomright");
 
-// Items
+// Markers
 
-// @https://github.com/pointhi/leaflet-color-markers
-let redMarker = new L.Icon({
+const red = new L.Icon({
 	iconUrl:
 		"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
 	shadowUrl:
 		"https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
 	iconSize: [25, 41],
 	iconAnchor: [12, 41],
-	popupAnchor: [1, -34],
+	popupAnchor: [0, -34],
 	shadowSize: [41, 41],
 });
 
+const frenchFries = L.divIcon({
+	html: twemoji.parse("\uD83C\uDF5F"),
+	iconSize: [36, 36],
+	iconAnchor: [18, 10],
+	className: "dummy",
+});
+
+const beerMugs = L.divIcon({
+	html: twemoji.parse("\ud83c\udf7b"),
+	iconSize: [36, 36],
+	iconAnchor: [18, 10],
+	className: "dummy",
+});
+
+const shoppingCart = L.divIcon({
+	html: twemoji.parse("\uD83D\uDED2"),
+	iconSize: [36, 36],
+	iconAnchor: [18, 10],
+	className: "dummy",
+});
+
+const nationalPark = L.divIcon({
+	html: twemoji.parse("\uD83C\uDFDE"),
+	iconSize: [36, 36],
+	iconAnchor: [18, 10],
+	className: "dummy",
+});
+
+const books = L.divIcon({
+	html: twemoji.parse("\uD83D\uDCDA"),
+	iconSize: [36, 36],
+	iconAnchor: [18, 10],
+	className: "dummy",
+});
+
+// Current pos marker
+
 if (pos) {
 	const marker = L.marker([pos.latitude, pos.longitude], {
-		icon: redMarker,
+		icon: red,
 	}).addTo(map);
 	marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
 }
 
 // Functions
 
+const getIcone = (ico) => {
+	if (ico) {
+		switch (ico) {
+			case "frenchFries":
+				return { ic: frenchFries, text: "frenchFries" };
+			case "beerMugs":
+				return { ic: beerMugs, text: "beerMugs" };
+			case "shoppingCart":
+				return { ic: shoppingCart, text: "shoppingCart" };
+			case "nationalPark":
+				return { ic: nationalPark, text: "nationalPark" };
+			case "books":
+				return { ic: books, text: "books" };
+			default:
+				return { ic: red, text: "red" };
+		}
+	} else {
+		switch ($("#marker-selector-image").attr("src")) {
+			case "./assets/markers/french-fries.png":
+				return { ic: frenchFries, text: "frenchFries" };
+			case "./assets/markers/clinking-beer-mugs.png":
+				return { ic: beerMugs, text: "beerMugs" };
+			case "./assets/markers/shopping-cart.png":
+				return { ic: shoppingCart, text: "shoppingCart" };
+			case "./assets/markers/national-park.png":
+				return { ic: nationalPark, text: "nationalPark" };
+			case "./assets/markers/books.png":
+				return { ic: books, text: "books" };
+			default:
+				return { ic: red, text: "red" };
+		}
+	}
+};
+
 let timer;
 
-const placeMarker = (e, popupText) => {
+const placeMarker = (e, popupText, ico) => {
 	const { lat, lng } = e.latlng;
 
+	let { ic, text } = getIcone(ico);
+
 	// Ajout sur la carte
-	const marker = L.marker([lat, lng], { icon: redMarker }).addTo(map);
+	const marker = L.marker([lat, lng], { icon: ic }).addTo(map);
 	marker.bindPopup(popupText);
 
-	// Plus besoin de la variable en local storage
-	if (localStorage.getItem("popup")) {
-		localStorage.removeItem("popup");
+	if ($("#popup-text").val() && $("#popup-text").val() !== "") {
 		$("#popup-text").val("");
 	}
 
@@ -68,7 +138,11 @@ const placeMarker = (e, popupText) => {
 		}
 	});
 
-	markers.push({ coords: { latitude: lat, longitude: lng }, popup: popupText });
+	markers.push({
+		coords: { latitude: lat, longitude: lng },
+		popup: popupText,
+		icon: text,
+	});
 };
 
 const planSync = () => {
@@ -86,15 +160,17 @@ $.each(markers, (undefined, marker) => {
 		{
 			latlng: { lat: marker.coords.latitude, lng: marker.coords.longitude },
 		},
-		marker.popup
+		marker.popup,
+		marker.icon
 	);
 });
 let oldMarkers = [...markers]; // copie
 
 if (username) {
+	// Si connecté
 	map.on("click", (e) => {
-		const popupText = localStorage.getItem("popup");
-		if (popupText) {
+		const popupText = $("#popup-text").val();
+		if (popupText && popupText !== "") {
 			placeMarker(e, popupText);
 			planSync();
 		}
