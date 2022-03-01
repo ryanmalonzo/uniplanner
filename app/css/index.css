@@ -116,6 +116,7 @@ nav {
 	border-radius: 7px;
 	width: 80px;
 	height: 80px;
+	user-select: none;
 }
 
 #marker-text {
