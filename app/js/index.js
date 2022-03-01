@@ -104,12 +104,28 @@ $("#marker-selector").click(() => {
 
 // User toolbar
 
-$("#add-marker").click(() => {
+$("#add-marker").click((e) => {
+	const elt = e.target;
+
+	// Si l'utilisateur annule son ajout
+	if ($(elt).html() === "Annuler") {
+		$("#popup-text").val("");
+		$(elt).html("Ajouter");
+		$(elt).removeClass("is-dark");
+		$(elt).addClass("is-info");
+		return;
+	}
+
 	const popupText = $("#popup-text").val();
 	if (!popupText || popupText === "") {
 		bulmaToast.toast({
 			message: "Merci de saisir une description pour votre marqueur.",
 			type: "is-danger",
 		});
+	} else {
+		// Passe en état "annuler"
+		$(elt).html("Annuler");
+		$(elt).removeClass("is-info");
+		$(elt).addClass("is-dark");
 	}
 });
