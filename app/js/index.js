@@ -96,13 +96,9 @@ $("#marker-selector").click(() => {
 		return marker.src === $("#marker-selector-image").attr("src");
 	});
 
-	if (index < markers.length - 1) {
-		++index;
-		$("#marker-selector-image").attr("src", markers[index].src);
-	} else {
-		index = 0;
-		$("#marker-selector-image").attr("src", markers[index].src);
-	}
+	index = index < markers.length - 1 ? index + 1 : 0;
+
+	$("#marker-selector-image").attr("src", markers[index].src);
 	$("#marker-text > p").text(markers[index].desc);
 });
 
