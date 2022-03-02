@@ -197,6 +197,7 @@ $("#search-address").click(() => {
 			},
 		})
 		.then((response) => {
+			console.log(response);
 			const coords = response.data.features[0].geometry.coordinates;
 			const lat = coords[1];
 			const lng = coords[0];

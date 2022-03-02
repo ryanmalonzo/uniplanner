@@ -89,6 +89,7 @@ nav {
 }
 
 .footer {
+	display: none;
 	bottom: 15px;
 	padding: 0;
 	background-color: transparent;
@@ -97,7 +98,6 @@ nav {
 
 #user-toolbar {
 	pointer-events: auto;
-	display: none;
 	padding: 10px;
 	background-color: var(--black);
 	border-radius: 7px;
@@ -109,7 +109,6 @@ nav {
 }
 
 #marker-selector {
-	display: none;
 	padding: 10px;
 	margin-bottom: 10px;
 	background-color: var(--black);

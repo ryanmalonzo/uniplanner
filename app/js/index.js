@@ -11,8 +11,7 @@ if (username) {
 
 	$("#nav-username").text(username);
 
-	$("#marker-selector").show();
-	$("#user-toolbar").show();
+	$(".footer").show();
 }
 
 // Modals
