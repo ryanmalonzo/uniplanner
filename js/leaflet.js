@@ -239,16 +239,17 @@ $("#belgique").click(() => {
 $("#search-address").click(() => {
 	// Fetch coordinates from address
 	axios
-		.get("https://nominatim.openstreetmap.org/search", {
+		.get("https://api-adresse.data.gouv.fr/search/", {
 			params: {
 				q: $("#search-text").val(),
-				format: "json",
+				limit: 1,
 			},
 		})
 		.then((response) => {
-			const coords = response.data[0];
-			const lat = coords.lat;
-			const lng = coords.lon;
+			console.log(response);
+			const coords = response.data.features[0].geometry.coordinates;
+			const lat = coords[1];
+			const lng = coords[0];
 
 			const marker = L.marker([lat, lng]).addTo(map);
 			marker.bindPopup($("#search-text").val()).openPopup();
