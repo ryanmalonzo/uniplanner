@@ -232,17 +232,16 @@ $("#belgique").click(() => {
 $("#search-address").click(() => {
 	// Fetch coordinates from address
 	axios
-		.get("https://api-adresse.data.gouv.fr/search/", {
+		.get("https://nominatim.openstreetmap.org/search", {
 			params: {
 				q: $("#search-text").val(),
-				limit: 1,
+				format: "json",
 			},
 		})
 		.then((response) => {
-			console.log(response);
-			const coords = response.data.features[0].geometry.coordinates;
-			const lat = coords[1];
-			const lng = coords[0];
+			const coords = response.data[0];
+			const lat = coords.lat;
+			const lng = coords.lon;
 
 			const marker = L.marker([lat, lng]).addTo(map);
 			marker.bindPopup($("#search-text").val()).openPopup();
