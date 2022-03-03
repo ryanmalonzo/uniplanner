@@ -121,6 +121,21 @@ const getIcone = (ico) => {
 
 let timer;
 
+let markers = getMarkers().then((markers) => {
+	$.each(markers, (undefined, marker) => {
+		placeMarker(
+			{
+				latlng: { lat: marker.coords.latitude, lng: marker.coords.longitude },
+			},
+			marker.popup,
+			marker.icon
+		);
+	});
+});
+
+let toRemove = new Array();
+let toAdd = new Array();
+
 const placeMarker = (e, popupText, ico) => {
 	const { lat, lng } = e.latlng;
 
@@ -143,13 +158,12 @@ const placeMarker = (e, popupText, ico) => {
 	marker.on("contextmenu", () => {
 		if (username) {
 			map.removeLayer(marker);
-			const index = markers.indexOf(marker);
-			markers.splice(index, 1); // supprime le marqueur
+			toRemove.push(marker);
 			planSync();
 		}
 	});
 
-	markers.push({
+	toAdd.push({
 		coords: { latitude: lat, longitude: lng },
 		popup: popupText,
 		icon: text,
@@ -159,27 +173,12 @@ const placeMarker = (e, popupText, ico) => {
 const planSync = () => {
 	clearTimeout(timer);
 	timer = setTimeout(async () => {
-		synchronize(oldMarkers, markers);
-
-		// markers = new Array();
-		// oldMarkers = new Array();
-
+		synchronize(toRemove, toAdd);
 		markers = await getMarkers();
-		oldMarkers = [...markers];
+		toRemove = new Array();
+		toAdd = new Array();
 	}, 1000);
 };
-
-let markers = await getMarkers();
-$.each(markers, (undefined, marker) => {
-	placeMarker(
-		{
-			latlng: { lat: marker.coords.latitude, lng: marker.coords.longitude },
-		},
-		marker.popup,
-		marker.icon
-	);
-});
-let oldMarkers = [...markers]; // copie
 
 if (username) {
 	// Si connecté

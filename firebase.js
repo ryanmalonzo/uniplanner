@@ -80,21 +80,16 @@ const getMarkers = async () => {
 	return mk;
 };
 
-const synchronize = (oldMarkers, newMarkers) => {
+const synchronize = (toRemove, toAdd) => {
 	console.log("Synchronizing markers to database...");
 
-	const removed = oldMarkers.filter((m) => !newMarkers.find((e) => m === e));
-	const added = newMarkers.filter((m) => !oldMarkers.find((e) => m === e));
-
 	// Retire de la BDD les marqueurs supprimés localement
-	$.each(removed, async (undefined, marker) => {
+	$.each(toRemove, async (undefined, marker) => {
+		const { lat, lng } = marker.getLatLng();
+
 		const q = query(
 			collection(db, "markers"),
-			where(
-				"coords",
-				"==",
-				new GeoPoint(marker.coords.latitude, marker.coords.longitude)
-			)
+			where("coords", "==", new GeoPoint(lat, lng))
 		);
 		const snap = await getDocs(q);
 		snap.forEach(async (m) => {
@@ -103,7 +98,7 @@ const synchronize = (oldMarkers, newMarkers) => {
 	});
 
 	// Ajoute les nouveaux marqueurs
-	$.each(added, async (undefined, marker) => {
+	$.each(toAdd, async (undefined, marker) => {
 		await addDoc(collection(db, "markers"), {
 			coords: new GeoPoint(marker.coords.latitude, marker.coords.longitude),
 			popup: marker.popup,
