@@ -14,7 +14,14 @@ const map = L.map("map", {
 	13 // zoom
 );
 L.tileLayer(
-	"https://api.mapbox.com/styles/v1/yusa-ai/cl0b3ef5u001314o17n961mja/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoieXVzYS1haSIsImEiOiJja3pmeDhyaWQyeGphMnZuOWU3cjFycWoxIn0.y9pV4e0r27XhX--vc6HVxA"
+	"https://api.mapbox.com/styles/v1/yusa-ai/cl0b3ef5u001314o17n961mja/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoieXVzYS1haSIsImEiOiJja3pmeDhyaWQyeGphMnZuOWU3cjFycWoxIn0.y9pV4e0r27XhX--vc6HVxA",
+	{
+		noWrap: true,
+		bounds: [
+			[-90, -180],
+			[90, 180],
+		],
+	}
 ).addTo(map);
 
 // map.zoomControl.setPosition("bottomright");
