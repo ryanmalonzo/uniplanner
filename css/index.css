@@ -1,5 +1,5 @@
 :root {
-	--black: #181818;
+	--white: white;
 	--blue: #209cee;
 }
 
@@ -13,7 +13,7 @@ html {
 }
 
 nav {
-	background-color: var(--black) !important;
+	background-color: var(--white) !important;
 }
 
 #logo {
@@ -62,7 +62,7 @@ nav {
 
 #login-modal > .modal-content,
 #register-modal > .modal-content {
-	background-color: rgba(0, 0, 0, 0.75);
+	background-color: rgba(255, 255, 255, 0.288);
 	border-radius: 5px;
 	padding: 80px;
 }
@@ -103,7 +103,6 @@ nav {
 }
 
 #country-selection > button {
-	background-color: var(--black);
 	height: 35px;
 	margin-right: 5px;
 	pointer-events: auto;
@@ -112,7 +111,7 @@ nav {
 #user-toolbar {
 	pointer-events: auto;
 	padding: 10px;
-	background-color: var(--black);
+	background-color: var(--white);
 	border-radius: 7px;
 	width: 400px;
 }
@@ -124,7 +123,7 @@ nav {
 #marker-selector {
 	padding: 10px;
 	margin-bottom: 10px;
-	background-color: var(--black);
+	background-color: var(--white);
 	border-radius: 7px;
 	width: 80px;
 	height: 80px;
@@ -134,14 +133,13 @@ nav {
 #marker-text {
 	display: flex;
 	align-items: center;
-	color: white;
 	padding: 0 5px 0 5px;
 	font-size: 15px;
 	font-weight: bolder;
 	pointer-events: auto;
 	width: 200px;
 	height: 30px;
-	background-color: var(--black);
+	background-color: var(--white);
 	border-radius: 7px;
 	margin-bottom: 10px;
 	width: fit-content;
@@ -172,15 +170,11 @@ img.emoji {
 	.navbar-start {
 		display: flex;
 		flex-grow: 1;
-		background-color: inherit;
+		background-color: initial;
 		align-items: center;
 	}
 
 	.navbar-end {
 		justify-content: right;
-	}
-
-	.navbar-item {
-		color: white;
 	}
 }
