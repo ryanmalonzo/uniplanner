@@ -79,7 +79,7 @@
 	</head>
 	<body>
 		<!--Navbar-->
-		<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+		<nav class="navbar is-white" role="navigation" aria-label="main navigation">
 			<div
 				class="navbar-brand is-flex is-flex-direction-row is-align-items-center"
 			>
@@ -104,6 +104,9 @@
 			<div id="navbar" class="navbar-menu">
 				<div class="navbar-start">
 					<p id="nav-username" class="navbar-item"></p>
+					<p id="nav-utilisation" class="navbar-item is-clickable">
+						Utilisation
+					</p>
 					<p id="nav-about" class="navbar-item is-clickable">À propos</p>
 				</div>
 				<div class="navbar-end">
@@ -123,6 +126,35 @@
 				</div>
 			</div>
 		</nav>
+
+		<!--Utilisation-->
+		<div class="modal" id="utilisation-modal">
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Utilisation</p>
+				</header>
+				<section class="modal-card-body">
+					<p><u>Fonctionnalités</u> :</p>
+					<ul>
+						<li>
+							- Changer de pays : déposer le bouton associé sur la carte ou
+							cliquer simplement dessus
+						</li>
+						<li>
+							- Ajouter un marqueur : taper sa description, cliquer sur le
+							bouton "Ajouter" puis le placer sur la carte via un clic gauche
+						</li>
+						<li>
+							- Rechercher une adresse postale. La saisie doit être la plus
+							précise possible pour un résultat optimal (utilise
+							<a href="https://nominatim.org/" target="_blank">Nominatim</a>)
+						</li>
+					</ul>
+				</section>
+				<footer class="modal-card-foot"></footer>
+			</div>
+		</div>
 
 		<!--À propos-->
 		<div class="modal" id="about-modal">

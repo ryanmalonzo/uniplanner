@@ -7,14 +7,28 @@ import * as bulmaToast from "../lib/rfoel/bulma-toast.js";
 if (username) {
 	$("#nav-inscription").hide();
 	$("#nav-connexion").hide();
-	$("#nav-deconnexion").show();
+
+	$("#nav-utilisation").css("display", "flex");
+	$("#nav-deconnexion").css("display", "flex");
 
 	$("#nav-username").text(username);
 
-	$(".footer").show();
+	$(".footer").show(); // display: block
 }
 
 // Modals
+
+// MODAL Utilisation
+
+$("#nav-utilisation").click(() => {
+	$("#utilisation-modal").addClass("is-active");
+});
+
+$("#utilisation-modal").click((e) => {
+	if ($(e.target).hasClass("modal-background")) {
+		$("#utilisation-modal").removeClass("is-active");
+	}
+});
 
 // MODAL À propos
 

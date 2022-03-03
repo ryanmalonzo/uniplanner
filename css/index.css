@@ -1,5 +1,5 @@
 :root {
-	--white: white;
+	--white: #f5f5f5;
 	--blue: #209cee;
 }
 
@@ -10,10 +10,6 @@
 
 html {
 	overflow: hidden;
-}
-
-nav {
-	background-color: var(--white) !important;
 }
 
 #logo {
@@ -47,10 +43,15 @@ nav {
 	z-index: 9997;
 }
 
+#nav-utilisation {
+	display: none;
+}
+
 #nav-deconnexion {
 	display: none;
 }
 
+#utilisation-modal,
 #about-modal,
 #geo-modal {
 	z-index: 9999;
@@ -70,7 +71,7 @@ nav {
 #login-modal > .modal-content > h1,
 #register-modal > .modal-content > h1,
 .label {
-	color: white;
+	color: var(--white);
 }
 
 .label {
