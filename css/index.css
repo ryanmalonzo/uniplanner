@@ -96,6 +96,19 @@ nav {
 	pointer-events: none;
 }
 
+#country-selection {
+	border-radius: 7px;
+	margin-bottom: 10px;
+	width: 300px;
+}
+
+#country-selection > button {
+	background-color: var(--black);
+	height: 35px;
+	margin-right: 5px;
+	pointer-events: auto;
+}
+
 #user-toolbar {
 	pointer-events: auto;
 	padding: 10px;

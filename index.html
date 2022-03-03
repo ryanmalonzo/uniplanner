@@ -18,12 +18,10 @@
 		<link
 			rel="stylesheet"
 			href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-			integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
 			crossorigin=""
 		/>
 		<script
 			src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-			integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
 			crossorigin=""
 		></script>
 
@@ -312,6 +310,18 @@
 
 		<!--Controls-->
 		<footer class="footer">
+			<div id="country-selection" class="is-flex is-flex-direction-row">
+				<button id="france" class="button is-black country-button">
+					France
+				</button>
+				<button id="canada" class="button is-black country-button">
+					Canada
+				</button>
+				<button id="belgique" class="button is-black country-button">
+					Belgique
+				</button>
+			</div>
+
 			<div id="marker-toolbar" class="is-flex is-align-items-end">
 				<figure id="marker-selector" class="image is-128x128 is-clickable">
 					<img
@@ -345,7 +355,14 @@
 			</div>
 		</footer>
 
-		<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+			crossorigin="anonymous"
+		></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script type="module" src="../firebase.js"></script>
 		<script type="module" src="./js/auth.js"></script>

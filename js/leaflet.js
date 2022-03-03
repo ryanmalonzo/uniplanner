@@ -7,7 +7,6 @@ const pos = hasCurrentPos() ? getCurrentPos() : setCurrentPos();
 const center = new GeoPoint(48.864716, 2.349014); // centre de Paris
 
 const map = L.map("map", {
-	minZoom: 7,
 	zoomControl: false,
 	attributionControl: false,
 }).setView(
@@ -68,7 +67,7 @@ const books = L.divIcon({
 	className: "dummy",
 });
 
-// Current pos marker
+// Marqueur sur position courante (service de géolocalisation)
 
 if (pos) {
 	const marker = L.marker([pos.latitude, pos.longitude], {
@@ -77,7 +76,7 @@ if (pos) {
 	marker.bindPopup("<p>Vous êtes ici !</p>").openPopup();
 }
 
-// Functions
+// Marqueurs
 
 const getIcone = (ico) => {
 	if (ico) {
@@ -186,6 +185,35 @@ if (username) {
 	});
 	map.on("contextmenu", () => {}); // disable browser context menu
 }
+
+// Glisser-déposer pour changer de pays (jQuery UI)
+
+$(() => {
+	$("#france").draggable({ cancel: false, revert: "valid" });
+	$("#canada").draggable({ cancel: false, revert: "valid" });
+	$("#belgique").draggable({ cancel: false, revert: "valid" });
+
+	$("#map").droppable({
+		accept: ".country-button",
+		drop: (undefined, ui) => {
+			switch (ui.draggable.attr("id")) {
+				case "france":
+					map.setView(new L.LatLng(46.71109, 1.7191036), 7);
+					break;
+				case "canada":
+					map.setView(new L.LatLng(56.130366, -106.346771), 5);
+					break;
+				case "belgique":
+					map.setView(new L.LatLng(50.5039, 4.4699), 9);
+					break;
+				default:
+					console.error("Pays inconnu.");
+			}
+		},
+	});
+});
+
+// Recherche de position par adresse postale
 
 $("#search-address").click(() => {
 	// Fetch coordinates from address
