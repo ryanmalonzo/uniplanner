@@ -1,5 +1,5 @@
 import * as bulmaToast from "../lib/rfoel/bulma-toast.js";
-import { register, login, logout } from "../../firebase.js";
+import { register, login, logout } from "../firebase.js";
 
 bulmaToast.setDefaults({
 	duration: 3000,

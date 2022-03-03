@@ -1,4 +1,4 @@
-import { GeoPoint } from "../../firebase.js";
+import { GeoPoint } from "../firebase.js";
 
 function hasGeoPermission() {
 	return new Promise((resolve) => {

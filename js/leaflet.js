@@ -1,5 +1,5 @@
 import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./geolocation.js";
-import { username, GeoPoint, getMarkers, synchronize } from "../../firebase.js";
+import { username, GeoPoint, getMarkers, synchronize } from "../firebase.js";
 
 // Map
 

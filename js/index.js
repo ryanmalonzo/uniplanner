@@ -1,4 +1,4 @@
-import { username } from "../../firebase.js";
+import { username } from "../firebase.js";
 import { hasGeoPermission, setCurrentPos } from "./geolocation.js";
 import * as bulmaToast from "../lib/rfoel/bulma-toast.js";
 
