@@ -213,6 +213,20 @@ $(() => {
 	});
 });
 
+// ... Ou tout simplement en cliquant sur les boutons
+
+$("#france").click(() => {
+	map.setView(new L.LatLng(46.71109, 1.7191036), 7);
+});
+
+$("#canada").click(() => {
+	map.setView(new L.LatLng(56.130366, -106.346771), 5);
+});
+
+$("#belgique").click(() => {
+	map.setView(new L.LatLng(50.5039, 4.4699), 9);
+});
+
 // Recherche de position par adresse postale
 
 $("#search-address").click(() => {
