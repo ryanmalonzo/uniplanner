@@ -80,31 +80,38 @@ const getMarkers = async () => {
 	return mk;
 };
 
-const synchronize = (toRemove, toAdd) => {
-	console.log("Synchronizing markers to database...");
+const addToDatabase = async (marker) => {
+	console.log("Adding marker to database...");
 
-	// Retire de la BDD les marqueurs supprimés localement
-	$.each(toRemove, async (undefined, marker) => {
-		const { lat, lng } = marker.getLatLng();
-
-		const q = query(
-			collection(db, "markers"),
-			where("coords", "==", new GeoPoint(lat, lng))
-		);
-		const snap = await getDocs(q);
-		snap.forEach(async (m) => {
-			await deleteDoc(doc(db, "markers", m.id));
-		});
-	});
-
-	// Ajoute les nouveaux marqueurs
-	$.each(toAdd, async (undefined, marker) => {
-		await addDoc(collection(db, "markers"), {
-			coords: new GeoPoint(marker.coords.latitude, marker.coords.longitude),
-			popup: marker.popup,
-			icon: marker.icon,
-		});
+	await addDoc(collection(db, "markers"), {
+		coords: new GeoPoint(marker.coords.latitude, marker.coords.longitude),
+		popup: marker.popup,
+		icon: marker.icon,
 	});
 };
 
-export { login, register, username, logout, GeoPoint, getMarkers, synchronize };
+const removeFromDatabase = async (marker) => {
+	console.log("Removing marker from database...");
+
+	const { lat, lng } = marker.getLatLng();
+
+	const q = query(
+		collection(db, "markers"),
+		where("coords", "==", new GeoPoint(lat, lng))
+	);
+	const snap = await getDocs(q);
+	snap.forEach(async (m) => {
+		await deleteDoc(doc(db, "markers", m.id));
+	});
+};
+
+export {
+	login,
+	register,
+	username,
+	logout,
+	GeoPoint,
+	getMarkers,
+	addToDatabase,
+	removeFromDatabase,
+};

@@ -1,5 +1,11 @@
 import { hasCurrentPos, getCurrentPos, setCurrentPos } from "./geolocation.js";
-import { username, GeoPoint, getMarkers, synchronize } from "../firebase.js";
+import {
+	username,
+	GeoPoint,
+	getMarkers,
+	addToDatabase,
+	removeFromDatabase,
+} from "../firebase.js";
 
 // Map
 
@@ -121,7 +127,7 @@ const getIcone = (ico) => {
 
 let timer;
 
-let markers = getMarkers().then((markers) => {
+getMarkers().then((markers) => {
 	$.each(markers, (undefined, marker) => {
 		placeMarker(
 			{
@@ -133,9 +139,6 @@ let markers = getMarkers().then((markers) => {
 	});
 });
 
-let toRemove = new Array();
-let toAdd = new Array();
-
 const placeMarker = (e, popupText, ico) => {
 	const { lat, lng } = e.latlng;
 
@@ -144,6 +147,20 @@ const placeMarker = (e, popupText, ico) => {
 	// Ajout sur la carte
 	const marker = L.marker([lat, lng], { icon: ic }).addTo(map);
 	marker.bindPopup(popupText);
+
+	// Programmation de la suppression
+	marker.on("contextmenu", () => {
+		if (username) {
+			map.removeLayer(marker);
+			removeFromDatabase(marker);
+		}
+	});
+
+	return { lat, lng, text };
+};
+
+const placeNewMarker = (e, popupText, ico) => {
+	const { lat, lng, text } = placeMarker(e, popupText, ico);
 
 	if ($("#popup-text").val() && $("#popup-text").val() !== "") {
 		$("#popup-text").val("");
@@ -154,30 +171,11 @@ const placeMarker = (e, popupText, ico) => {
 	$("#add-marker").removeClass("is-dark");
 	$("#add-marker").addClass("is-info");
 
-	// Programmation de la suppression
-	marker.on("contextmenu", () => {
-		if (username) {
-			map.removeLayer(marker);
-			toRemove.push(marker);
-			planSync();
-		}
-	});
-
-	toAdd.push({
+	addToDatabase({
 		coords: { latitude: lat, longitude: lng },
 		popup: popupText,
 		icon: text,
 	});
-};
-
-const planSync = () => {
-	clearTimeout(timer);
-	timer = setTimeout(async () => {
-		synchronize(toRemove, toAdd);
-		markers = await getMarkers();
-		toRemove = new Array();
-		toAdd = new Array();
-	}, 1000);
 };
 
 if (username) {
@@ -185,8 +183,7 @@ if (username) {
 	map.on("click", (e) => {
 		const popupText = $("#popup-text").val();
 		if (popupText && popupText !== "") {
-			placeMarker(e, popupText);
-			planSync();
+			placeNewMarker(e, popupText);
 		}
 	});
 	map.on("contextmenu", () => {}); // disable browser context menu
