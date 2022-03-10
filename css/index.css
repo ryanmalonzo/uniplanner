@@ -1,0 +1,185 @@
+:root {
+	--white: #f5f5f5;
+	--blue: #209cee;
+}
+
+.center {
+	height: 100vh;
+	width: 100vw;
+}
+
+html {
+	overflow: hidden;
+}
+
+#logo {
+	width: 40px;
+	height: 40px;
+	margin: 10px 0 10px 18px;
+}
+
+.navbar-brand > .navbar-item {
+	font-family: "Pacifico", cursive;
+	font-size: 30px;
+}
+
+.navbar-brand > .navbar-item > a {
+	color: inherit;
+}
+
+/* Navbar buttons */
+#nav-inscription {
+	background-color: var(--blue) !important;
+}
+
+.navbar,
+.footer {
+	position: absolute;
+	border-radius: 7px;
+	left: 0;
+	right: 0;
+	margin: 15px auto 0 auto;
+	width: 87.5%;
+	z-index: 9997;
+}
+
+#nav-utilisation {
+	display: none;
+}
+
+#nav-deconnexion {
+	display: none;
+}
+
+#utilisation-modal,
+#about-modal,
+#geo-modal {
+	z-index: 9999;
+}
+#login-modal,
+#register-modal {
+	z-index: 9998;
+}
+
+#login-modal > .modal-content,
+#register-modal > .modal-content {
+	background-color: rgba(255, 255, 255, 0.288);
+	border-radius: 5px;
+	padding: 80px;
+}
+
+#login-modal > .modal-content > h1,
+#register-modal > .modal-content > h1,
+.label {
+	color: var(--white);
+}
+
+.label {
+	font-weight: bolder;
+}
+
+#no-account,
+#has-account {
+	cursor: pointer;
+}
+
+#map {
+	height: 100vh;
+	width: 100vw;
+	position: relative;
+}
+
+.footer {
+	display: none;
+	bottom: 15px;
+	padding: 0;
+	background-color: transparent;
+	pointer-events: none;
+}
+
+#country-selection {
+	border-radius: 7px;
+	margin-bottom: 10px;
+	width: 300px;
+}
+
+#country-selection > button {
+	height: 35px;
+	margin-right: 5px;
+	pointer-events: auto;
+}
+
+#user-toolbar {
+	pointer-events: auto;
+	padding: 10px;
+	background-color: var(--white);
+	border-radius: 7px;
+	width: 400px;
+}
+
+#marker-toolbar > * {
+	margin: 2px;
+}
+
+#marker-selector {
+	padding: 10px;
+	margin-bottom: 10px;
+	background-color: var(--white);
+	border-radius: 7px;
+	width: 80px;
+	height: 80px;
+	user-select: none;
+}
+
+#marker-text {
+	display: flex;
+	align-items: center;
+	padding: 0 5px 0 5px;
+	font-size: 15px;
+	font-weight: bolder;
+	pointer-events: auto;
+	width: 200px;
+	height: 30px;
+	background-color: var(--white);
+	border-radius: 7px;
+	margin-bottom: 10px;
+	width: fit-content;
+}
+
+.footer .control > * {
+	margin: 2px;
+}
+
+.footer .control > button {
+	min-width: 90px;
+}
+
+img.emoji {
+	width: 30px;
+	height: 30px;
+}
+
+.leaflet-popup-content {
+	text-align: center;
+}
+
+/* Ecrase breakpoint 1024px de Bulma sur les navbar */
+@media screen and (min-width: 0px) and (max-width: 1023px) {
+	.navbar > * {
+		border-radius: 7px;
+	}
+
+	.navbar,
+	.navbar-end,
+	.navbar-menu,
+	.navbar-start {
+		display: flex;
+		flex-grow: 1;
+		background-color: initial;
+		align-items: center;
+	}
+
+	.navbar-end {
+		justify-content: right;
+	}
+}

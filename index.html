@@ -1,22 +1,409 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head> 
-    <!--Favicon-->
-    <link rel="apple-touch-icon" sizes="180x180" href="./app/assets/favicon/apple-touch-icon.png" /> 
-    <link rel="icon" type="image/png" sizes="32x32" href="./app/assets/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="./app/assets/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="./app/assets/favicon/site.webmanifest" />
-    
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Leamap</title>
-  </head>
-  <body>
-    <script>
-      window.location.href = "./app/map.html";
-    </script>
-  </body>
-      
-  </body>
+	<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+		<!--Front-->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+		/>
+
+		<!--Leaflet-->
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+			crossorigin=""
+		/>
+		<script
+			src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+			crossorigin=""
+		></script>
+
+		<!--CSS-->
+		<link rel="stylesheet" href="./css/index.css" />
+
+		<!--Favicon-->
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="./assets/favicon/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./assets/favicon/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="./assets/favicon/favicon-16x16.png"
+		/>
+		<link rel="manifest" href="./assets/favicon/site.webmanifest" />
+
+		<!--Misc-->
+		<script
+			src="https://kit.fontawesome.com/f0cb48158b.js"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"
+			crossorigin="anonymous"
+		></script>
+
+		<meta name="title" content="Uniplanner" />
+		<meta
+			name="description"
+			content="Découvre les bons plans autour de ton école et partage ceux des autres."
+		/>
+		<meta
+			name="keywords"
+			content="ecole, universite, plans, carte, interactive"
+		/>
+		<meta name="robots" content="noindex, nofollow" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta charset="utf-8" />
+		<meta name="language" content="French" />
+		<meta name="author" content="Fabien Rondan, Hassen Arkab, Ryan Malonzo" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>Uniplanner</title>
+	</head>
+	<body>
+		<!--Navbar-->
+		<nav class="navbar is-white" role="navigation" aria-label="main navigation">
+			<div
+				class="navbar-brand is-flex is-flex-direction-row is-align-items-center"
+			>
+				<a href="/" class="is-flex"
+					><img id="logo" src="./assets/logo.jpg" alt="Logo uniplanner"
+				/></a>
+				<p class="navbar-item"><a href="/">uniplanner</a></p>
+				<!--TODO toggle or replace-->
+				<!-- <a
+					role="button"
+					class="navbar-burger"
+					aria-label="menu"
+					aria-expanded="false"
+					data-target="navbar"
+				>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a> -->
+			</div>
+
+			<div id="navbar" class="navbar-menu">
+				<div class="navbar-start">
+					<p id="nav-username" class="navbar-item"></p>
+					<p id="nav-utilisation" class="navbar-item is-clickable">
+						Utilisation
+					</p>
+					<p id="nav-about" class="navbar-item is-clickable">À propos</p>
+				</div>
+				<div class="navbar-end">
+					<div class="navbar-item">
+						<div class="buttons">
+							<button class="button is-primary" id="nav-inscription">
+								<strong>Inscription</strong>
+							</button>
+							<button class="button is-light" id="nav-connexion">
+								Connexion
+							</button>
+							<button class="button is-light" id="nav-deconnexion">
+								Déconnexion
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<!--Utilisation-->
+		<div class="modal" id="utilisation-modal">
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Utilisation</p>
+				</header>
+				<section class="modal-card-body">
+					<p><u>Fonctionnalités</u> :</p>
+					<ul>
+						<li>
+							- Changer de pays : déposer le bouton associé sur la carte ou
+							cliquer simplement dessus
+						</li>
+						<li>
+							- Ajouter un marqueur : taper sa description, cliquer sur le
+							bouton "Ajouter" puis le placer sur la carte via un clic gauche
+						</li>
+						<li>
+							- Rechercher une adresse postale. La saisie doit être la plus
+							précise possible pour un résultat optimal (utilise
+							<a
+								href="https://adresse.data.gouv.fr/api-doc/adresse"
+								target="_blank"
+								>l'API Adresse du gouvernement français</a
+							>)
+						</li>
+					</ul>
+				</section>
+				<footer class="modal-card-foot"></footer>
+			</div>
+		</div>
+
+		<!--À propos-->
+		<div class="modal" id="about-modal">
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">À propos</p>
+				</header>
+				<section class="modal-card-body">
+					<p>
+						Uniplanner est un projet étudiant de carte communautaire permettant
+						à ses utilisateurs d'ajouter sur la carte des bons plans autour de
+						leurs écoles.
+					</p>
+					<br />
+					<p>
+						<u>Outils utilisés</u> : Leaflet, leaflet-color-markers par pointhi,
+						Mapbox, Firebase, Bulma, Bulma Toast par rfoel.
+					</p>
+					<br />
+					<p>
+						Projet réalisé par Fabien Rondan, Hassen Arkab et Ryan Malonzo dans
+						le cadre du module de PWEB, année universitaire 2021 - 2022 à l'IUT
+						de Paris Cité.
+					</p>
+				</section>
+				<footer class="modal-card-foot"></footer>
+			</div>
+		</div>
+
+		<!--Géolocalisation-->
+		<div class="modal" id="geo-modal">
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Géolocalisation requise</p>
+				</header>
+				<section class="modal-card-body">
+					<p>
+						Le service de géolocalisation de votre navigateur est nécessaire au
+						bon fonctionnement de Leamap.
+					</p>
+					<p>
+						Merci de nous en donner l'accès lorsqu'il vous le sera demandé, ou
+						bien de vérifier les autorisations que vous avez accordées à Leamap.
+					</p>
+				</section>
+				<footer class="modal-card-foot">
+					<button class="button is-success" id="geo-modal-button">OK</button>
+				</footer>
+			</div>
+		</div>
+
+		<!--Connexion-->
+		<div class="modal" id="login-modal">
+			<div class="modal-background"></div>
+			<div class="modal-content">
+				<h1 class="title">Connexion</h1>
+
+				<!--Mail-->
+				<div class="field">
+					<label class="label">Adresse mail</label>
+					<div class="control has-icons-left">
+						<input
+							class="input"
+							type="email"
+							placeholder="Adresse mail"
+							id="login-mail"
+						/>
+						<span class="icon is-small is-left">
+							<i class="fa-solid fa-envelope"></i>
+						</span>
+					</div>
+				</div>
+
+				<!--Mot de passe-->
+				<div class="field">
+					<label class="label">Mot de passe</label>
+					<div class="control has-icons-left">
+						<input
+							class="input"
+							type="password"
+							placeholder="Mot de passe"
+							id="login-mdp"
+						/>
+						<span class="icon is-small is-left">
+							<i class="fa-solid fa-lock"></i>
+						</span>
+					</div>
+				</div>
+
+				<!--Se connecter-->
+				<div class="field">
+					<div class="control">
+						<button class="button is-light is-fullwidth" id="login-btn">
+							Se connecter
+						</button>
+					</div>
+				</div>
+
+				<!--Inscription-->
+				<p class="has-text-white is-underlined" id="no-account">
+					Pas encore de compte ?
+				</p>
+			</div>
+		</div>
+
+		<!--Inscription-->
+		<div class="modal" id="register-modal">
+			<div class="modal-background"></div>
+			<div class="modal-content">
+				<h1 class="title">Inscription</h1>
+
+				<!--Nom-->
+				<div class="field">
+					<label class="label">Nom</label>
+					<div class="control has-icons-left">
+						<input
+							class="input"
+							type="text"
+							placeholder="Nom"
+							id="register-nom"
+						/>
+						<span class="icon is-small is-left">
+							<i class="fa-solid fa-id-card"></i>
+						</span>
+					</div>
+				</div>
+
+				<!--Mail-->
+				<div class="field">
+					<label class="label">Adresse mail</label>
+					<div class="control has-icons-left">
+						<input
+							class="input"
+							type="email"
+							placeholder="Adresse mail"
+							id="register-mail"
+						/>
+						<span class="icon is-small is-left">
+							<i class="fa-solid fa-envelope"></i>
+						</span>
+					</div>
+				</div>
+
+				<!--Mot de passe-->
+				<div class="field">
+					<label class="label">Mot de passe</label>
+					<div class="control has-icons-left">
+						<input
+							class="input"
+							type="password"
+							placeholder="Mot de passe"
+							id="register-mdp"
+						/>
+						<span class="icon is-small is-left">
+							<i class="fa-solid fa-lock"></i>
+						</span>
+					</div>
+				</div>
+
+				<!--S'inscrire-->
+				<div class="field">
+					<div class="control">
+						<button class="button is-light is-fullwidth" id="register-btn">
+							S'inscrire
+						</button>
+					</div>
+				</div>
+
+				<!--Connexion-->
+				<p class="has-text-white is-underlined" id="has-account">
+					Déjà un compte ?
+				</p>
+			</div>
+		</div>
+
+		<!--Map-->
+		<div
+			class="is-flex is-justify-content-center is-align-items-center"
+			id="wrapper"
+		>
+			<div class="center" id="map"></div>
+		</div>
+
+		<!--Controls-->
+		<footer class="footer">
+			<div id="country-selection" class="is-flex is-flex-direction-row">
+				<button id="france" class="button is-light country-button">
+					France
+				</button>
+				<button id="canada" class="button is-light country-button">
+					Canada
+				</button>
+				<button id="belgique" class="button is-light country-button">
+					Belgique
+				</button>
+			</div>
+
+			<div id="marker-toolbar" class="is-flex is-align-items-end">
+				<figure id="marker-selector" class="image is-128x128 is-clickable">
+					<img
+						id="marker-selector-image"
+						src="./assets/markers/red-marker.png"
+						alt="Image marqueur"
+					/>
+				</figure>
+				<div id="marker-text"><p>Marqueur par défaut</p></div>
+			</div>
+
+			<div id="user-toolbar">
+				<div class="control is-flex is-flex-direction-row">
+					<input
+						id="popup-text"
+						class="input"
+						type="text"
+						placeholder="Description du marqueur"
+					/>
+					<button id="add-marker" class="button is-info">Ajouter</button>
+				</div>
+				<div class="control is-flex is-flex-direction-row">
+					<input
+						id="search-text"
+						class="input"
+						type="text"
+						placeholder="Adresse postale"
+					/>
+					<button id="search-address" class="button is-info">Chercher</button>
+				</div>
+			</div>
+		</footer>
+
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script type="module" src="../firebase.js"></script>
+		<script type="module" src="./js/auth.js"></script>
+		<script type="module" src="./js/geolocation.js"></script>
+		<script type="module" src="./js/index.js"></script>
+		<script type="module" src="./js/leaflet.js"></script>
+	</body>
 </html>
