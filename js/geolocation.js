@@ -2,9 +2,13 @@ import { GeoPoint } from "../firebase.js";
 
 function hasGeoPermission() {
 	return new Promise((resolve) => {
-		navigator.permissions.query({ name: "geolocation" }).then((result) => {
-			resolve(result.state === "granted");
-		});
+		if (navigator.geolocation) {
+			navigator.permissions.query({ name: "geolocation" }).then((result) => {
+				resolve(result.state === "granted");
+			});
+		} else {
+			resolve(false);
+		}
 	});
 }
 
