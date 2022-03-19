@@ -2,9 +2,18 @@ import { GeoPoint } from "../firebase.js";
 
 function hasGeoPermission() {
 	return new Promise((resolve) => {
-		navigator.permissions.query({ name: "geolocation" }).then((result) => {
-			resolve(result.state === "granted");
-		});
+		// Problème de compatibilité avec Safari
+		if (window.safari !== undefined) {
+			resolve(true);
+		}
+
+		if (navigator.geolocation) {
+			navigator.permissions.query({ name: "geolocation" }).then((result) => {
+				resolve(result.state === "granted");
+			});
+		} else {
+			resolve(false);
+		}
 	});
 }
 
