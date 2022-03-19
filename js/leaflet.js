@@ -6,6 +6,7 @@ import {
 	addToDatabase,
 	removeFromDatabase,
 } from "../firebase.js";
+import { API_KEY } from "../config.js";
 
 // Map
 
@@ -232,26 +233,54 @@ $("#belgique").click(() => {
 
 // Recherche de position par adresse postale
 
+// $("#search-address").click(() => {
+// 	// Fetch coordinates from address
+// 	axios
+// 		.get(
+// 			"https://cors-yusa.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json",
+// 			{
+// 				params: {
+// 					query: $("#search-text").val(),
+// 				},
+// 			}
+// 		)
+// 		.then((response) => {
+// 			const res = response.data[0];
+// 			const lat = res.lat;
+// 			const lng = res.lon;
+
+// 			const marker = L.marker([lat, lng]).addTo(map);
+// 			marker.bindPopup($("#search-text").val()).openPopup();
+// 			map.panTo([lat, lng]); // centre la carte sur le point
+
+// 			marker.on("contextmenu", () => {
+// 				if (username) {
+// 					map.removeLayer(marker);
+// 				}
+// 			});
+
+// 			$("#search-text").val("");
+// 		})
+// 		.catch((error) => {
+// 			console.error(error);
+// 		});
+// });
+
 $("#search-address").click(() => {
-	// Fetch coordinates from address
-	axios
-		.get(
-			"https://cors-yusa.herokuapp.com/https://nominatim.openstreetmap.org/search",
-			{
-				params: {
-					q: $("#search-text").val(),
-					limit: 1,
-					format: "json",
-				},
-			}
-		)
-		.then((response) => {
-			const res = response.data[0];
-			const lat = res.lat;
-			const lng = res.lon;
+	$.ajax({
+		method: "get",
+		url: "https://cors-yusa.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json",
+		data: {
+			query: $("#search-text").val(),
+			key: API_KEY.GOOGLE_MAPS,
+		},
+		success: (response) => {
+			const res = response.results[0];
+			const lat = res.geometry.location.lat;
+			const lng = res.geometry.location.lng;
 
 			const marker = L.marker([lat, lng]).addTo(map);
-			marker.bindPopup($("#search-text").val()).openPopup();
+			marker.bindPopup(res.formatted_address).openPopup();
 			map.panTo([lat, lng]); // centre la carte sur le point
 
 			marker.on("contextmenu", () => {
@@ -261,8 +290,6 @@ $("#search-address").click(() => {
 			});
 
 			$("#search-text").val("");
-		})
-		.catch((error) => {
-			console.error(error);
-		});
+		},
+	});
 });
