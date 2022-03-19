@@ -233,39 +233,6 @@ $("#belgique").click(() => {
 
 // Recherche de position par adresse postale
 
-// $("#search-address").click(() => {
-// 	// Fetch coordinates from address
-// 	axios
-// 		.get(
-// 			"https://cors-yusa.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json",
-// 			{
-// 				params: {
-// 					query: $("#search-text").val(),
-// 				},
-// 			}
-// 		)
-// 		.then((response) => {
-// 			const res = response.data[0];
-// 			const lat = res.lat;
-// 			const lng = res.lon;
-
-// 			const marker = L.marker([lat, lng]).addTo(map);
-// 			marker.bindPopup($("#search-text").val()).openPopup();
-// 			map.panTo([lat, lng]); // centre la carte sur le point
-
-// 			marker.on("contextmenu", () => {
-// 				if (username) {
-// 					map.removeLayer(marker);
-// 				}
-// 			});
-
-// 			$("#search-text").val("");
-// 		})
-// 		.catch((error) => {
-// 			console.error(error);
-// 		});
-// });
-
 $("#search-address").click(() => {
 	$.ajax({
 		method: "get",
