@@ -235,17 +235,20 @@ $("#belgique").click(() => {
 $("#search-address").click(() => {
 	// Fetch coordinates from address
 	axios
-		.get("https://api-adresse.data.gouv.fr/search/", {
-			params: {
-				q: $("#search-text").val(),
-				limit: 1,
-			},
-		})
+		.get(
+			"https://cors-yusa.herokuapp.com/https://nominatim.openstreetmap.org/search",
+			{
+				params: {
+					q: $("#search-text").val(),
+					limit: 1,
+					format: "json",
+				},
+			}
+		)
 		.then((response) => {
-			console.log(response);
-			const coords = response.data.features[0].geometry.coordinates;
-			const lat = coords[1];
-			const lng = coords[0];
+			const res = response.data[0];
+			const lat = res.lat;
+			const lng = res.lon;
 
 			const marker = L.marker([lat, lng]).addTo(map);
 			marker.bindPopup($("#search-text").val()).openPopup();
