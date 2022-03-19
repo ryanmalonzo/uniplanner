@@ -91,10 +91,27 @@ html {
 
 .footer {
 	display: none;
-	bottom: 15px;
+	bottom: 50px;
 	padding: 0;
 	background-color: transparent;
 	pointer-events: none;
+}
+
+#powered-by-google {
+	margin: 15px auto 0 auto;
+	width: 87.5%;
+	position: absolute;
+	bottom: 15px;
+	left: 0;
+	right: 0;
+	z-index: 9997;
+}
+
+#powered-by-google > * {
+	width: 125px;
+	background-color: white;
+	border-radius: 7px;
+	padding: 5px;
 }
 
 #country-selection {
